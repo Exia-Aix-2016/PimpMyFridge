@@ -20,7 +20,7 @@ public class PimpMyFridge extends Application {
 
         //Chargement du fichier fxml
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("mainWindmows.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("mainWindows.fxml"));
 
             Scene scene = new Scene(root, 1000, 500);
 
