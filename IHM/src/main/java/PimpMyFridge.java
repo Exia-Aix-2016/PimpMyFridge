@@ -1,4 +1,5 @@
 import javafx.application.Application;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -10,6 +11,13 @@ import java.net.URL;
 
 public class PimpMyFridge extends Application {
 
+    final String appName = "Pimp My Fridge";
+    URL urlFxml;
+    FXMLLoader loaderFXML;
+    PIDController controller;
+    Parent root;
+    Scene scene;
+
     public static void main(String[] args) {
         launch(args);
     }
@@ -17,27 +25,20 @@ public class PimpMyFridge extends Application {
     @Override
     public void start(Stage stage) throws Exception {
 
-        stage.setTitle("Pimp My Fridge");
-
-
+        stage.setTitle(this.appName);
 
         //Chargement du fichier fxml
         try {
+            this.urlFxml = getClass().getResource("mainWindows.fxml");
+
+            this.loaderFXML = new FXMLLoader(this.urlFxml);
+
+            this.controller = loaderFXML.getController();
 
 
-            final URL fxmlURL = getClass().getResource("mainWindows.fxml");
-            final FXMLLoader fxmlLoader = new FXMLLoader(fxmlURL);
-
-            final PIDController controler = fxmlLoader.getController();
-
-
-            Parent root = fxmlLoader.load();
-            Scene scene = new Scene(root, 1000, 500);
-
-            stage.setScene(scene);
-
-            controler.name();
-
+            this.root = loaderFXML.load();
+            this.scene = new Scene(this.root, 1000, 500);
+            stage.setScene(this.scene);
 
         }catch (IOException err){
             System.err.println("Erreur chargement du fichier .fxml : " + err.toString());
