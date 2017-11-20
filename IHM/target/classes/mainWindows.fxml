@@ -13,8 +13,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pid.PIDController">
    <center>
       <LineChart BorderPane.alignment="CENTER">
         <xAxis>
@@ -50,7 +49,7 @@
                   <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="4">
                      <children>
                         <Label text="proportionnel :" />
-                        <TextField />
+                        <TextField fx:id="test" />
                      </children>
                   </HBox>
                   <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="5">
