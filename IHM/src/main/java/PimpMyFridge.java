@@ -15,7 +15,7 @@ public class PimpMyFridge extends Application {
 
         Parent root = FXMLLoader.load(getClass().getResource("mainWindows.fxml"));
 
-        Scene scene = new Scene(root, 300, 275);
+        Scene scene = new Scene(root, 1000, 500);
 
         stage.setScene(scene);
         stage.setTitle("Pimp My Fridge");
