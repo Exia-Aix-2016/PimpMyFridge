@@ -1,5 +1,4 @@
 import javafx.application.Application;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -25,9 +24,10 @@ public class PimpMyFridge extends Application {
     @Override
     public void start(Stage stage) throws Exception {
 
+        //Set application name.
         stage.setTitle(this.appName);
 
-        //Chargement du fichier fxml
+        //Chargement
         try {
             this.urlFxml = getClass().getResource("mainWindows.fxml");
 

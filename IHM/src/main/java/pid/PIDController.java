@@ -7,13 +7,4 @@ import java.util.ResourceBundle;
 
 public class PIDController {
 
-
-    private @FXML TextField test;
-
-
-    public void name(){
-
-        this.test.setText("YOLO");
-    }
-
 }
