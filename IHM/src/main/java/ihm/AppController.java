@@ -17,7 +17,7 @@ import java.util.Observer;
 /**
  * Controller de l'application
  */
-public class AppController implements Observer {
+public class AppController {
 
     private ArduinoStates arduinoStates;
 
@@ -73,10 +73,38 @@ public class AppController implements Observer {
         this.arduinoStates = new ArduinoStates();
 
 
+        //Bind property
+
+        this.arduinoStates.getCoefI().bind(this.coefI.textProperty());
+
+
+
+        //BTN LISTERNERS
+
+
+        this.btn_Set_coefI.setOnAction((event) -> {
+            // TODO: 21/11/2017
+        });
+        this.btn_Reset_coefI.setOnAction((event) -> {
+            // TODO: 21/11/2017
+        });
+
+        this.btn_Set_coefP.setOnAction((event) -> {
+            // TODO: 21/11/2017
+        });
+        this.btn_Reset_coefP.setOnAction((event) -> {
+            // TODO: 21/11/2017
+        });
+
+        this.btn_Set_coefD.setOnAction((event) -> {
+            // TODO: 21/11/2017
+
+        });
+        this.btn_Reset_coefD.setOnAction((event) -> {
+            // TODO: 21/11/2017
+
+        });
+
     }
 
-    @Override
-    public void update(Observable o, Object arg) {
-
-    }
 }
