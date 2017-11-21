@@ -44,26 +44,14 @@ public class AppController implements Observer {
     @FXML
     public void initialize() {
 
-        coefI.textProperty().bindBidirectional(coefD.textProperty());
-
-
         //Création du modèle arduino.
         this.arduinoStates = new ArduinoStates();
+
+
     }
-
-
 
     @Override
     public void update(Observable o, Object arg) {
-
-    }
-
-
-    /**
-     * Permet de bind les valeurs fxml avec celles du modèle.
-     */
-    private void bindingValue(){
-
 
     }
 }

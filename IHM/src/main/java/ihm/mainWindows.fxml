@@ -7,15 +7,12 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ihm.AppController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="975.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ihm.AppController">
    <center>
-      <LineChart fx:id="hist" BorderPane.alignment="CENTER">
+      <LineChart fx:id="hist" prefHeight="291.0" prefWidth="975.0" BorderPane.alignment="CENTER">
         <xAxis>
           <CategoryAxis side="BOTTOM" />
         </xAxis>
@@ -24,60 +21,64 @@
         </yAxis>
       </LineChart>
    </center>
-   <right>
-      <VBox prefHeight="650.0" prefWidth="355.0" BorderPane.alignment="CENTER">
+   <bottom>
+      <HBox prefHeight="179.0" prefWidth="975.0" spacing="200.0" BorderPane.alignment="CENTER">
          <children>
-            <GridPane BorderPane.alignment="CENTER">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="324.0" minWidth="10.0" prefWidth="324.0" />
-              </columnConstraints>
-              <rowConstraints>
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
+            <VBox prefHeight="64.0" prefWidth="157.0">
                <children>
-                  <Label prefHeight="21.0" prefWidth="344.0" text="Coéfficients" GridPane.rowIndex="3">
+                  <Label text="Réglage Température : " />
+                  <TextField />
+               </children>
+            </VBox>
+            <VBox prefHeight="100.0" prefWidth="326.0">
+               <children>
+                  <HBox prefHeight="33.0" prefWidth="326.0">
+                     <children>
+                        <Label text="Réglage PID" />
+                     </children>
                      <padding>
-                        <Insets left="139.0" right="50.0" />
+                        <Insets left="120.0" />
                      </padding>
-                  </Label>
-                  <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="4">
+                  </HBox>
+                  <HBox prefHeight="50.0" prefWidth="326.0" spacing="10.0">
                      <children>
-                        <Label text="proportionnel :" />
-                        <TextField fx:id="coefP" />
+                        <Label text="Proportionnalité :" />
+                        <TextField />
                      </children>
                   </HBox>
-                  <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="5">
+                  <HBox prefHeight="50.0" prefWidth="326.0" spacing="10.0">
                      <children>
-                        <Label prefHeight="18.0" prefWidth="75.0" text="intégrateur :" />
-                        <TextField fx:id="coefI" />
+                        <Label text="Intégralité :" />
+                        <TextField />
                      </children>
                   </HBox>
-                  <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="6">
+                  <HBox prefHeight="50.0" prefWidth="326.0" spacing="10.0">
                      <children>
-                        <Label text="dérivateur  :" />
-                        <TextField fx:id="coefD" />
-                     </children>
-                  </HBox>
-                  <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
-                     <children>
-                        <Label text="Consigne :" />
-                        <TextField fx:id="consigne" />
-                     </children>
-                  </HBox>
-                  <HBox prefHeight="100.0" prefWidth="200.0">
-                     <children>
-                        <Label fx:id="temp" text="Température (temps réel) :" />
+                        <Label text="Dérivation :" />
+                        <TextField />
                      </children>
                   </HBox>
                </children>
-            </GridPane>
+            </VBox>
          </children>
-      </VBox>
-   </right>
+         <padding>
+            <Insets left="238.0" />
+         </padding>
+      </HBox>
+   </bottom>
+   <top>
+      <HBox prefHeight="50.0" prefWidth="975.0" spacing="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label text="Température Plaque :" />
+            <Label text="Température Ambiante :" />
+            <Label text="Point de rosée :" />
+         </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+         <padding>
+            <Insets left="196.0" top="11.0" />
+         </padding>
+      </HBox>
+   </top>
 </BorderPane>
