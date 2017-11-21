@@ -21,11 +21,40 @@ public class AppController implements Observer {
 
     private ArduinoStates arduinoStates;
 
+
+    //Displaying data
     @FXML
-    private Label temp;
+    private Label tempPlaque;
+    @FXML
+    private Label tempAmbiante;
+    @FXML
+    private Label pointRosee;
+
+
+    //Button
+
 
     @FXML
-    private TextField consigne;
+    private Button btn_Set_Temp;
+    @FXML
+    private Button btn_Reset_Temp;
+    @FXML
+    private Button btn_Set_coefP;
+    @FXML
+    private Button btn_Reset_coefP;
+    @FXML
+    private Button btn_Set_coefI;
+    @FXML
+    private Button btn_Reset_coefI;
+    @FXML
+    private Button btn_Set_coefD;
+    @FXML
+    private Button btn_Reset_coefD;
+
+
+    //Setting param
+    @FXML
+    private TextField consigneTemp;
     @FXML
     private TextField coefP;
     @FXML
@@ -35,10 +64,6 @@ public class AppController implements Observer {
 
     @FXML
     private LineChart hist;
-
-    XYChart.Series series = new XYChart.Series();
-
-
 
 
     @FXML

@@ -27,12 +27,12 @@
          <children>
             <VBox prefHeight="64.0" prefWidth="157.0" spacing="7.0">
                <children>
-                  <Label text="Réglage Température : " />
-                  <TextField />
+                  <Label fx:id="labelTempConsigne" text="Réglage Température : " />
+                  <TextField fx:id="consigneTemp" />
                   <HBox prefHeight="36.0" prefWidth="157.0" spacing="15.0">
                      <children>
-                        <Button mnemonicParsing="false" text="Appliquer" />
-                        <Button mnemonicParsing="false" text="Reset" />
+                        <Button fx:id="btn_Set_Temp" mnemonicParsing="false" text="Appliquer" />
+                        <Button fx:id="btn_Reset_Temp" mnemonicParsing="false" text="Reset" />
                      </children>
                   </HBox>
                </children>
@@ -41,7 +41,7 @@
                <children>
                   <HBox prefHeight="33.0" prefWidth="326.0">
                      <children>
-                        <Label text="Réglage PID" />
+                        <Label fx:id="label_Title_PID_Param" text="Réglage PID" />
                      </children>
                      <padding>
                         <Insets left="187.0" />
@@ -49,28 +49,28 @@
                   </HBox>
                   <HBox prefHeight="50.0" prefWidth="326.0" spacing="10.0">
                      <children>
-                        <Label text="Proportionnalité :" />
-                        <TextField />
-                        <Button mnemonicParsing="false" text="Appliquer" />
-                        <Button mnemonicParsing="false" text="Reset" />
+                        <Label fx:id="label_PID_P" text="Proportionnalité :" />
+                        <TextField fx:id="coefP" />
+                        <Button fx:id="btn_Set_coefP" mnemonicParsing="false" text="Appliquer" />
+                        <Button fx:id="btn_Reset_coefP" mnemonicParsing="false" text="Reset" />
                      </children>
                   </HBox>
                   <HBox prefHeight="50.0" prefWidth="326.0" spacing="10.0">
                      <children>
-                        <Label text="Intégralité :" />
+                        <Label fx:id="label_PID_I" text="Intégralité :" />
                         <HBox prefHeight="49.0" prefWidth="30.0" />
-                        <TextField />
-                        <Button mnemonicParsing="false" text="Appliquer" />
-                        <Button mnemonicParsing="false" text="Reset" />
+                        <TextField fx:id="coefI" />
+                        <Button fx:id="btn_Set_coefI" mnemonicParsing="false" text="Appliquer" />
+                        <Button fx:id="btn_Reset_coefI" mnemonicParsing="false" text="Reset" />
                      </children>
                   </HBox>
                   <HBox prefHeight="50.0" prefWidth="326.0" spacing="10.0">
                      <children>
-                        <Label text="Dérivation :" />
+                        <Label fx:id="label_PID_D" text="Dérivation :" />
                         <HBox prefHeight="100.0" prefWidth="30.0" />
-                        <TextField />
-                        <Button mnemonicParsing="false" text="Appliquer" />
-                        <Button mnemonicParsing="false" text="Reset" />
+                        <TextField fx:id="coefD" />
+                        <Button fx:id="btn_Set_coefD" mnemonicParsing="false" text="Appliquer" />
+                        <Button fx:id="btn_Reset_coefI" mnemonicParsing="false" text="Reset" />
                      </children>
                   </HBox>
                </children>
@@ -84,9 +84,9 @@
    <top>
       <HBox prefHeight="50.0" prefWidth="975.0" spacing="100.0" BorderPane.alignment="CENTER">
          <children>
-            <Label text="Température Plaque :" />
-            <Label text="Température Ambiante :" />
-            <Label text="Point de rosée :" />
+            <Label fx:id="tempPlaque" text="Température Plaque :" />
+            <Label fx:id="tempAmbiante" text="Température Ambiante :" />
+            <Label fx:id="pointRosee" text="Point de rosée :" />
          </children>
          <BorderPane.margin>
             <Insets />
