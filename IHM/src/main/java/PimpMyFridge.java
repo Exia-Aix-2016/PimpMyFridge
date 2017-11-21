@@ -3,7 +3,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import pid.PIDController;
+import ihm.AppController;
 
 import java.io.IOException;
 import java.net.URL;
@@ -13,7 +13,7 @@ public class PimpMyFridge extends Application {
     final String appName = "Pimp My Fridge";
     URL urlFxml;
     FXMLLoader loaderFXML;
-    PIDController controller;
+    AppController controller;
     Parent root;
     Scene scene;
 
@@ -29,7 +29,7 @@ public class PimpMyFridge extends Application {
 
         //Chargement
         try {
-            this.urlFxml = getClass().getResource("mainWindows.fxml");
+            this.urlFxml = getClass().getResource("ihm/mainWindows.fxml");
 
             this.loaderFXML = new FXMLLoader(this.urlFxml);
 
@@ -37,8 +37,9 @@ public class PimpMyFridge extends Application {
 
 
             this.root = loaderFXML.load();
-            this.scene = new Scene(this.root, 1000, 500);
+            this.scene = new Scene(this.root, 1250, 700);
             stage.setScene(this.scene);
+            stage.setResizable(false);
 
         }catch (IOException err){
             System.err.println("Erreur chargement du fichier .fxml : " + err.toString());
