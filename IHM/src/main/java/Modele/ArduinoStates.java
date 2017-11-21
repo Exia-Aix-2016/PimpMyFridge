@@ -1,69 +1,46 @@
 package Modele;
 
 import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
+
 
 public class ArduinoStates {
 
     //Valeur mesure
-    private DoubleProperty temperaturePlaque;
-    private DoubleProperty temperatureAmbiante;
-    private DoubleProperty pointRosee;
+    private StringProperty temperaturePlaque;
+    private StringProperty temperatureAmbiante;
+    private StringProperty pointRosee;
 
     //PID
-    private DoubleProperty coefP;
-    private DoubleProperty coefI;
-    private DoubleProperty coefD;
+    private StringProperty coefP;
+    private StringProperty coefI;
+    private StringProperty coefD;
 
-    public double getPointRosee() {
-        return pointRosee.get();
+
+    public ArduinoStates(){
+
     }
 
-    public double getTemperatureAmbiante() {
-        return temperatureAmbiante.get();
-    }
 
-    public double getTemperaturePlaque() {
-        return temperaturePlaque.get();
-    }
-
-    public double getCoefD() {
-        return coefD.get();
-    }
-
-    public double getCoefI() {
-        return coefI.get();
-    }
-
-    public double getCoefP() {
-        return coefP.get();
-    }
-
-    public void setCoefD(double coefD) {
-        this.coefD.set(coefD);
-    }
-
-    public void setCoefI(double coefI) {
-        this.coefI.set(coefI);
-    }
-
-    public void setCoefP(double coefP) {
-        this.coefP.set(coefP);
-    }
-
-    public void setPointRosee(double pointRosee) {
-        this.pointRosee.set(pointRosee);
-    }
-
-    public void setTemperatureAmbiante(double temperatureAmbiante) {
-        this.temperatureAmbiante.set(temperatureAmbiante);
-    }
-
-    public void setTemperaturePlaque(double temperaturePlaque) {
-        this.temperaturePlaque.set(temperaturePlaque);
-    }
-
-    public DoubleProperty pointRoseeProperty() {
+    public StringProperty getPointRosee() {
         return pointRosee;
     }
+    public StringProperty getTemperatureAmbiante() {
+        return temperatureAmbiante;
+    }
+    public StringProperty getTemperaturePlaque() {
+        return temperaturePlaque;
+    }
+    public StringProperty getCoefD() {
+        return coefD;
+    }
+    public StringProperty getCoefI() {
+        return coefI;
+    }
+    public StringProperty getCoefP() {
+        return coefP;
+    }
+
 }

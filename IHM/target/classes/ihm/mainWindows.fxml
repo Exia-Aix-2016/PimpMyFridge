@@ -49,19 +49,19 @@
                   <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="4">
                      <children>
                         <Label text="proportionnel :" />
-                        <TextField fx:id="pro" />
+                        <TextField fx:id="coefP" />
                      </children>
                   </HBox>
                   <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="5">
                      <children>
                         <Label prefHeight="18.0" prefWidth="75.0" text="intégrateur :" />
-                        <TextField fx:id="integ" />
+                        <TextField fx:id="coefI" />
                      </children>
                   </HBox>
                   <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="6">
                      <children>
                         <Label text="dérivateur  :" />
-                        <TextField fx:id="deriv" />
+                        <TextField fx:id="coefD" />
                      </children>
                   </HBox>
                   <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
@@ -72,7 +72,7 @@
                   </HBox>
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Label text="Température (temps réel) :" />
+                        <Label fx:id="temp" text="Température (temps réel) :" />
                      </children>
                   </HBox>
                </children>

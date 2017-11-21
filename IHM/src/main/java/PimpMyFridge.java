@@ -29,7 +29,7 @@ public class PimpMyFridge extends Application {
 
         //Chargement
         try {
-            this.urlFxml = getClass().getResource("mainWindows.fxml");
+            this.urlFxml = getClass().getResource("ihm/mainWindows.fxml");
 
             this.loaderFXML = new FXMLLoader(this.urlFxml);
 
