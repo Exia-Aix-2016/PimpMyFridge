@@ -23,6 +23,7 @@ public class ArduinoStates implements Observer{
     private StringProperty propertyKd = new SimpleStringProperty();
 
 
+
     private static ArduinoStates instance;
 
     private ArduinoStates(){
@@ -68,6 +69,7 @@ public class ArduinoStates implements Observer{
             this.propertyPw.setValue(String.valueOf(state.getPw()));
             this.propertyTt.setValue(String.valueOf(state.getTt()));
 
+
         });
 
         this.stateHistory.push(state);
@@ -97,5 +99,19 @@ public class ArduinoStates implements Observer{
 
     public StringProperty getPropertyPr() {
         return this.propertyPr;
+    }
+
+    public StringProperty getPropertyTt() {
+        return this.propertyTt;
+    }
+
+    public StringProperty getPropertyKp() {
+        return propertyKp;
+    }
+    public StringProperty getPropertyKi() {
+        return propertyKi;
+    }
+    public StringProperty getPropertyKd() {
+        return propertyKd;
     }
 }

@@ -68,6 +68,15 @@ public class AppController {
     @FXML
     private LineChart hist;
 
+    @FXML
+    private Label Tt_actuel;
+    @FXML
+    private Label Kp_actuel;
+    @FXML
+    private Label Ki_actuel;
+    @FXML
+    private Label Kd_actuel;
+
 
     @FXML
     public void initialize() {
@@ -82,6 +91,11 @@ public class AppController {
         this.H.textProperty().bind(this.arduinoStates.getPropertyH());
         this.Ta.textProperty().bind(this.arduinoStates.getPropertyTa());
         this.Pr.textProperty().bind(this.arduinoStates.getPropertyPr());
+
+        this.Tt_actuel.textProperty().bind(this.arduinoStates.getPropertyTt());
+        this.Kp_actuel.textProperty().bind(this.arduinoStates.getPropertyKp());
+        this.Ki_actuel.textProperty().bind(this.arduinoStates.getPropertyKi());
+        this.Kd_actuel.textProperty().bind(this.arduinoStates.getPropertyKd());
 
 
 
