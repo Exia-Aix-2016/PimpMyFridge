@@ -12,6 +12,9 @@ double rosee;
 double humidity;
 double tempAmbiant;
 
+unsigned long actualTime;
+unsigned long lastTime;
+
 DHT dht(DHTPIN, DHTTYPE);
 
 void checkDHT(){
@@ -36,4 +39,14 @@ double getHumidity(){
 
 double getTempAmbiant(){
   return dht.readTemperature();
+}
+
+void scanDHT (){
+  actualTime = millis();
+  if(actualTime =! lastTime){
+    lastTime = actualTime;
+  }
+  if(actualTime - lastTime > 2000){
+    checkDHT();
+  }
 }
