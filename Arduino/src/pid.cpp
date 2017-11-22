@@ -31,3 +31,15 @@ double getSetPoint(){
 void setTempPlaque(double tempPlaqueIn){
   tempPlaque = tempPlaqueIn;
 }
+
+double getKp(){
+  return KP;
+}
+
+double getKi(){
+  return KI;
+}
+
+double getKd(){
+  return KD;
+}
