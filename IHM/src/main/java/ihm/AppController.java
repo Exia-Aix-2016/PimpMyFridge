@@ -26,7 +26,7 @@ public class AppController {
     @FXML
     private Label Tp;
     @FXML
-    private Label tempAmbiante;
+    private Label Ta;
     @FXML
     private Label pointRosee;
     @FXML
@@ -74,7 +74,9 @@ public class AppController {
 
 
         //Bind property
-        this.Tp.textProperty().bind(arduinoStates.propertyTp);
+        this.Tp.textProperty().bind(this.arduinoStates.getPropertyTp());
+        this.H.textProperty().bind(this.arduinoStates.getPropertyH());
+        this.Ta.textProperty().bind(this.arduinoStates.getPropertyTa());
 
 
 
