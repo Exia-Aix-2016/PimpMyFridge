@@ -28,7 +28,7 @@
             <VBox prefHeight="64.0" prefWidth="157.0" spacing="7.0">
                <children>
                   <Label fx:id="labelTempConsigne" text="Réglage Température : " />
-                  <TextField fx:id="consigneTemp" />
+                  <TextField fx:id="Tt" />
                   <HBox prefHeight="36.0" prefWidth="157.0" spacing="15.0">
                      <children>
                         <Button fx:id="btn_Set_ConsigneTemp" mnemonicParsing="false" text="Appliquer" />

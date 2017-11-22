@@ -1,5 +1,6 @@
 package Modele;
 
+import ihm.AppController;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -66,6 +67,7 @@ public class ArduinoStates implements Observer{
             this.propertyPr.setValue(String.valueOf(state.getPr()));
             this.propertyPw.setValue(String.valueOf(state.getPw()));
             this.propertyTt.setValue(String.valueOf(state.getTt()));
+
         });
 
         this.stateHistory.push(state);

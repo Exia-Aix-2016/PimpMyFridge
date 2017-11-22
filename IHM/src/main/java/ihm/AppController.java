@@ -2,6 +2,7 @@ package ihm;
 
 import Modele.ArduinoStates;
 import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
@@ -20,6 +21,7 @@ import java.util.Observer;
 public class AppController {
 
     private ArduinoStates arduinoStates;
+    private static AppController instance;
 
 
     //Displaying data
@@ -53,7 +55,8 @@ public class AppController {
 
     //Setting param
     @FXML
-    private TextField consigneTemp;
+    public TextField Tt;
+
     @FXML
     private TextField Kp;
     @FXML
@@ -69,6 +72,7 @@ public class AppController {
     @FXML
     public void initialize() {
 
+
         //Création du modèle arduino.
         this.arduinoStates = ArduinoStates.getArduinoStates();
 
@@ -78,7 +82,6 @@ public class AppController {
         this.H.textProperty().bind(this.arduinoStates.getPropertyH());
         this.Ta.textProperty().bind(this.arduinoStates.getPropertyTa());
         this.Pr.textProperty().bind(this.arduinoStates.getPropertyPr());
-
 
 
 

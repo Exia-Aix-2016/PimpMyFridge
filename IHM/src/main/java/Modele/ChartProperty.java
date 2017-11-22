@@ -11,7 +11,7 @@ public class ChartProperty implements Property {
     @Override
     public void bind(ObservableValue observable) {
 
-        
+
 
 
 
