@@ -70,7 +70,7 @@
                         <HBox prefHeight="100.0" prefWidth="30.0" />
                         <TextField fx:id="coefD" />
                         <Button fx:id="btn_Set_coefD" mnemonicParsing="false" text="Appliquer" />
-                        <Button fx:id="btn_Reset_coefI" mnemonicParsing="false" text="Reset" />
+                        <Button fx:id="btn_Reset_coefD" mnemonicParsing="false" text="Reset" />
                      </children>
                   </HBox>
                </children>

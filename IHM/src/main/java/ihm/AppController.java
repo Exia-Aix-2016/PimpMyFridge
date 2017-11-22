@@ -75,7 +75,7 @@ public class AppController {
 
         //Bind property
 
-        this.arduinoStates.getCoefI().bind(this.coefI.textProperty());
+
 
 
 
