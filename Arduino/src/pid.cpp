@@ -8,7 +8,8 @@
 #define KD 0.001
 
 double tempPlaque, outputVal;
-double setPoint = -12;
+double setPoint = 0;
+double targetTemp = 12;
 
 AutoPID PID(&tempPlaque, &setPoint, &outputVal, OUTPUT_MIN, OUTPUT_MAX, KP, KI, KD);
 
@@ -21,7 +22,12 @@ double getOutputVal(){
 }
 
 void setSetPoint(double setPointIn){
-  setPoint = setPointIn;
+  if(setPointIn > 0){
+    setPoint = setPointIn * -1;
+  }else{
+    setPoint = setPointIn;
+  }
+
 }
 
 double getSetPoint(){
@@ -42,4 +48,12 @@ double getKi(){
 
 double getKd(){
   return KD;
+}
+
+void setTargetTemp(double targetTempIn){
+  targetTemp = targetTempIn;
+}
+
+double getTargetTemp(){
+  return targetTemp;
 }

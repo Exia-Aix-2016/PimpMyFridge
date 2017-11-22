@@ -9,6 +9,7 @@ void setTempPlaque(double);
 double getKp();
 double getKi();
 double getKd();
-
+void setTargetTemp(double);
+double getTargetTemp();
 
 #endif
