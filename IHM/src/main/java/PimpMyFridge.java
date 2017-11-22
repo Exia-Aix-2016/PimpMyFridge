@@ -47,8 +47,6 @@ public class PimpMyFridge extends Application {
             this.controller = loaderFXML.getController();
             this.root = loaderFXML.load();
 
-
-            this.root = loaderFXML.load();
             this.scene = new Scene(this.root, 1300, 700);
             stage.setScene(this.scene);
             stage.setResizable(false);

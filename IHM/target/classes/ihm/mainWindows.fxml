@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="975.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ihm.AppController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="1297.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ihm.AppController">
    <center>
       <LineChart fx:id="hist" prefHeight="291.0" prefWidth="975.0" BorderPane.alignment="CENTER">
         <xAxis>
@@ -84,16 +84,40 @@
    <top>
       <HBox prefHeight="50.0" prefWidth="975.0" spacing="100.0" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="H" text="Humidité :" />
-            <Label fx:id="Tp" text="Température Plaque :" />
-            <Label fx:id="Ta" text="Température Ambiante :" />
-            <Label fx:id="Tr" text="Point de rosée :" />
+            <HBox prefHeight="39.0" prefWidth="223.0" spacing="5.0">
+               <children>
+                  <Label fx:id="Label_H" text="Humidité :" />
+                  <Label fx:id="H" text="0" />
+                  <Label text="\%" />
+               </children>
+            </HBox>
+            <HBox prefHeight="39.0" prefWidth="261.0" spacing="5.0">
+               <children>
+                  <Label fx:id="label_Tp" text="Température Plaque :" />
+                  <Label fx:id="Tp" text="0.0" />
+                  <Label text="°C" />
+               </children>
+            </HBox>
+            <HBox prefHeight="39.0" prefWidth="314.0" spacing="5.0">
+               <children>
+                  <Label text="Température ambiante : " />
+                  <Label fx:id="Ta" text="0.0" />
+                  <Label text="°C" />
+               </children>
+            </HBox>
+            <HBox prefHeight="39.0" prefWidth="269.0" spacing="5.0">
+               <children>
+                  <Label text="Point de rosée : " />
+                  <Label fx:id="Pr" text="0.0" />
+                  <Label text="°C" />
+               </children>
+            </HBox>
          </children>
          <BorderPane.margin>
             <Insets />
          </BorderPane.margin>
          <padding>
-            <Insets left="125.0" top="11.0" />
+            <Insets left="50.0" top="11.0" />
          </padding>
       </HBox>
    </top>

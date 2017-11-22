@@ -108,7 +108,7 @@
             <HBox prefHeight="39.0" prefWidth="269.0" spacing="5.0">
                <children>
                   <Label text="Point de rosée : " />
-                  <Label fx:id="Tr" text="0.0" />
+                  <Label fx:id="Pr" text="0.0" />
                   <Label text="°C" />
                </children>
             </HBox>
