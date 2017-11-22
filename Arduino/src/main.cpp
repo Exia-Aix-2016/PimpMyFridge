@@ -10,7 +10,6 @@ int getNextIndex(float coef);
 int sensor = A0;
 int fridge = 6;
 int R25 = 9411.0;
-int targetTemp = 12;
 
 float refTemp[21] = {0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100};
 float coefs[21] = {2.8665, 2.2907, 1.8438, 1.492, 1.2154, 1.0, 0.82976, 0.68635, 0.57103, 0.48015, 0.40545, 0.3417, 0.28952, 0.24714, 0.21183, 0.18194, 0.1568, 0.13592, 0.11822, 0.1034, 0.090741};
@@ -37,7 +36,7 @@ void loop() {
   double humidity = getHumidity();
   double tempAmbiant = getTempAmbiant();
 
-Serial.print("Humidite: ");
+/*Serial.print("Humidite: ");
 Serial.print(humidity);
 Serial.print(" \%  ");
 Serial.print("Temperature ambiante: ");
@@ -51,12 +50,46 @@ Serial.print(getOutputVal());
 Serial.print("/255  ");
 Serial.print("Point de rosee: ");
 Serial.print(calcRosee(tempAmbiant, humidity));
-Serial.println(" *C");
+Serial.println(" *C");*/
+
+Serial.print("<");
+Serial.print("Ta:");
+Serial.print(tempAmbiant);
+Serial.print("|");
+Serial.print("Tp:");
+Serial.print(getTemp(ohm));
+Serial.print("|");
+Serial.print("H:");
+Serial.print(humidity);
+Serial.print("|");
+Serial.print("Pr:");
+Serial.print(calcRosee(tempAmbiant, humidity));
+Serial.print("|");
+Serial.print("Pw:");
+Serial.print(getOutputVal());
+Serial.print("|");
+Serial.print("Tt:");
+Serial.print(getSetPoint() * -1);
+Serial.print("|");
+Serial.print("Kp:");
+Serial.print(getKp());
+Serial.print("|");
+Serial.print("Ki:");
+Serial.print(getKi());
+Serial.print("|");
+Serial.print("Kd:");
+Serial.print(getKd());
+Serial.println(">");
+
 
   if (Serial.available() > 0) {
-   setSetPoint(Serial.parseInt() * -1);
+   setTargetTemp(Serial.parseInt());
+   setSetPoint(getTargetTemp());
+ }else if(calcRosee(tempAmbiant, humidity) > getTargetTemp()){
+   setSetPoint(calcRosee(tempAmbiant, humidity));
+
  }else{
-   setSetPoint(calcRosee(tempAmbiant, humidity) * -1);
+   setSetPoint(getTargetTemp());
  }
 
 startPID();

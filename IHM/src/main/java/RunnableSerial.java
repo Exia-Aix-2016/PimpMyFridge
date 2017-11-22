@@ -3,6 +3,7 @@ import com.fazecast.jSerialComm.SerialPort;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.HashMap;
 import java.util.Observable;
 
 public class RunnableSerial extends Observable implements Runnable {
@@ -39,8 +40,7 @@ public class RunnableSerial extends Observable implements Runnable {
                     case '>':
                         incoming = false;
                         setChanged();
-                        notifyObservers(res);
-                        //this.write(res);
+                        notifyObservers(extractData(res));
                         break;
                     default:
                         if (incoming) {
@@ -72,5 +72,18 @@ public class RunnableSerial extends Observable implements Runnable {
         deleteObservers();
         comPort.closePort();
         System.out.println("port closed");
+    }
+
+    private HashMap<String, String> extractData(String packet) {
+        HashMap<String, String> hashMap = new HashMap<>();
+
+        for (String s: packet.split("\\|")) {
+            String[] kv = s.split(":");
+            if (kv.length == 2) {
+                hashMap.put(kv[0], kv[1]);
+            }
+        }
+
+        return hashMap;
     }
 }
