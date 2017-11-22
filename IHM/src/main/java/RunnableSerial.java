@@ -10,16 +10,23 @@ public class RunnableSerial extends Observable implements Runnable {
 
     private SerialPort comPort;
     private boolean exit = false;
-    OutputStream out;
-    InputStream in;
+    private OutputStream out;
+    private InputStream in;
 
-    RunnableSerial() {
+    private static RunnableSerial instance;
+
+    private RunnableSerial() {
         comPort = SerialPort.getCommPorts()[0];
         comPort.openPort();
         comPort.setComPortTimeouts(SerialPort.TIMEOUT_NONBLOCKING, 0, 0);
 
         out = comPort.getOutputStream();
         in = comPort.getInputStream();
+    }
+
+    public static RunnableSerial getInstance() {
+        if (instance == null) instance = new RunnableSerial();
+        return instance;
     }
 
     @Override
