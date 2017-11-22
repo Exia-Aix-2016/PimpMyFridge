@@ -12,7 +12,9 @@ public class ArduinoStates implements Observer{
     private Stack<State> stateHistory;
     private String[] keyList = {"Ta", "Tp", "H", "Pr", "Pw", "Tt", "Kp", "Ki", "Kd"};
 
-    public StringProperty propertyTp = new SimpleStringProperty();
+    private StringProperty propertyTp = new SimpleStringProperty();
+    private StringProperty propertyTa = new SimpleStringProperty();
+    private StringProperty propertyH = new SimpleStringProperty();
 
     private static ArduinoStates instance;
 
@@ -56,6 +58,8 @@ public class ArduinoStates implements Observer{
 
         Platform.runLater(() -> {
             this.propertyTp.setValue(String.valueOf(state.getTp()));
+            this.propertyH.setValue(String.valueOf(state.getH()));
+            this.propertyTa.setValue(String.valueOf(state.getTa()));
         });
 
         return true;
@@ -67,5 +71,17 @@ public class ArduinoStates implements Observer{
     @org.jetbrains.annotations.Contract(pure = true)
     public final State getState(final int index){
         return this.stateHistory.get(index);
+    }
+
+
+    //GETTER
+    public StringProperty getPropertyTa() {
+        return propertyTa;
+    }
+    public StringProperty getPropertyTp() {
+        return propertyTp;
+    }
+    public StringProperty getPropertyH() {
+        return propertyH;
     }
 }

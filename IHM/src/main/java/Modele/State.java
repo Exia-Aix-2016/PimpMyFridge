@@ -44,4 +44,31 @@ import java.time.*;
      public double getTp() {
          return Tp;
      }
+     public double getTa() {
+         return Ta;
+     }
+     public double getH() {
+         return H;
+     }
+     public double getTt() {
+         return Tt;
+     }
+     public double getKd() {
+         return Kd;
+     }
+     public double getKi() {
+         return Ki;
+     }
+     public double getKp() {
+         return Kp;
+     }
+     public double getPr() {
+         return Pr;
+     }
+     public double getPw() {
+         return Pw;
+     }
+     public Instant getTime() {
+         return time;
+     }
  }
