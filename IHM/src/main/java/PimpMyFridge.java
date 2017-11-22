@@ -1,3 +1,4 @@
+import Modele.ArduinoStates;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -7,6 +8,8 @@ import ihm.AppController;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Observable;
 
 public class PimpMyFridge extends Application {
 
@@ -18,6 +21,19 @@ public class PimpMyFridge extends Application {
     Scene scene;
 
     public static void main(String[] args) {
+        RunnableSerial rs = new RunnableSerial();
+
+        ArduinoStates arduinoStates = ArduinoStates.getArduinoStates();
+
+        rs.addObserver(arduinoStates);
+
+       /* rs.addObserver((Observable o, Object arg) -> {
+            HashMap hM = (HashMap<String, String>) arg;
+            System.out.println(hM);
+        });*/
+
+        new Thread(rs).start();
+
         launch(args);
     }
 

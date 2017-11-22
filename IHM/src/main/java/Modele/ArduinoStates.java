@@ -1,42 +1,62 @@
 package Modele;
 
+import javafx.application.Platform;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 import java.util.*;
 
 
 public class ArduinoStates implements Observer{
 
     private Stack<State> stateHistory;
+    private String[] keyList = {"Ta", "Tp", "H", "Pr", "Pw", "Tt", "Kp", "Ki", "Kd"};
 
-    public ArduinoStates(){
+    public StringProperty propertyTp = new SimpleStringProperty();
+
+    private static ArduinoStates instance;
+
+    private ArduinoStates(){
         this.stateHistory = new Stack<>();
+    }
+
+    public static ArduinoStates getArduinoStates() {
+        if (ArduinoStates.instance == null) {
+            ArduinoStates.instance = new ArduinoStates();
+        }
+
+        return ArduinoStates.instance;
     }
 
     @Override
     public void update(Observable o, Object arg) {
-        this.addState((HashMap<String, String>) arg);
+        this.addState((HashMap<String, Double>) arg);
     }
 
-    private boolean addState(final HashMap<String, String> serial){
+    private boolean addState(final HashMap<String, Double> serial){
 
         //Test empty zone in hash
-        for (String key : serial.keySet()) {
+        for (String key : keyList) {
 
-            if(serial.get(key).isEmpty()){
+            if(!serial.containsKey(key)){
                 return false;
-
             }
         }
 
 
-        State state = new State(Double.parseDouble(serial.get("Ta")),
-                                Double.parseDouble(serial.get("Tp")),
-                                Double.parseDouble(serial.get("H")),
-                                Double.parseDouble(serial.get("Pr")),
-                                Double.parseDouble(serial.get("Pw")),
-                                Double.parseDouble(serial.get("consigneTemp")),
-                                Double.parseDouble(serial.get("Kp")),
-                                Double.parseDouble(serial.get("Ki")),
-                                Double.parseDouble(serial.get("Kd")));
+        State state = new State(serial.get("Ta"),
+                                serial.get("Tp"),
+                                serial.get("H"),
+                                serial.get("Pr"),
+                                serial.get("Pw"),
+                                serial.get("Tt"),
+                                serial.get("Kp"),
+                                serial.get("Ki"),
+                                serial.get("Kd"));
+
+        Platform.runLater(() -> {
+            this.propertyTp.setValue(String.valueOf(state.getTp()));
+        });
 
         return true;
     }

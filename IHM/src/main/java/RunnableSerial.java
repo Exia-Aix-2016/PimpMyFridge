@@ -74,13 +74,13 @@ public class RunnableSerial extends Observable implements Runnable {
         System.out.println("port closed");
     }
 
-    private HashMap<String, String> extractData(String packet) {
-        HashMap<String, String> hashMap = new HashMap<>();
+    private HashMap<String, Double> extractData(String packet) {
+        HashMap<String, Double> hashMap = new HashMap<>();
 
         for (String s: packet.split("\\|")) {
             String[] kv = s.split(":");
             if (kv.length == 2) {
-                hashMap.put(kv[0], kv[1]);
+                hashMap.put(kv[0], Double.parseDouble(kv[1]));
             }
         }
 

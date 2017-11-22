@@ -24,7 +24,7 @@ public class AppController {
 
     //Displaying data
     @FXML
-    private Label tempPlaque;
+    private Label Tp;
     @FXML
     private Label tempAmbiante;
     @FXML
@@ -70,11 +70,11 @@ public class AppController {
     public void initialize() {
 
         //Création du modèle arduino.
-        this.arduinoStates = new ArduinoStates();
+        this.arduinoStates = ArduinoStates.getArduinoStates();
 
 
         //Bind property
-
+        this.Tp.textProperty().bind(arduinoStates.propertyTp);
 
 
 

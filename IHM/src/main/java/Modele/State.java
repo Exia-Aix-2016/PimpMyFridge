@@ -13,14 +13,14 @@ import java.time.*;
     private double Pw;//Puissance envoyé
 
      //Ordre
-     private double consigneTemp;
+     private double Tt;
      private double Kp;
      private double Ki;
      private double Kd;
     private Instant time;//instant de l'état.
 
 
-    public State(final double Ta, final double Tp, final double H, final double Pr, final double Pw, final double consigneTemp,
+    public State(final double Ta, final double Tp, final double H, final double Pr, final double Pw, final double Tt,
                  final double Kp, final double Ki, final double Kd){
 
         this.Ta = Ta;
@@ -30,12 +30,18 @@ import java.time.*;
         this.Pw = Pw;
 
         //Ordre.
-        this.consigneTemp = consigneTemp;
+        this.Tt = Tt;
         this.Kp = Kp;
         this.Ki = Ki;
         this.Kd = Kd;
 
 
         this.time = Instant.now();
+
+        System.out.println(this);
     }
-}
+
+     public double getTp() {
+         return Tp;
+     }
+ }
