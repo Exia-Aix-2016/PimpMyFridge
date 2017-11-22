@@ -37,8 +37,6 @@ import java.time.*;
 
 
         this.time = Instant.now();
-
-        System.out.println(this);
     }
 
      public double getTp() {

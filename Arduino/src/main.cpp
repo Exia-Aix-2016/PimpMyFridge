@@ -63,7 +63,7 @@ Serial.print("Ki:");
 Serial.print(getKi());
 Serial.print("|");
 Serial.print("Kd:");
-Serial.print(getKd());
+Serial.print(getKd(), 5);
 Serial.println(">");
 
 
