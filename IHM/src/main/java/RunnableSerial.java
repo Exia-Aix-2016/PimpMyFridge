@@ -13,6 +13,8 @@ public class RunnableSerial extends Observable implements Runnable {
     private OutputStream out;
     private InputStream in;
 
+    private String[] requiredKeyList = {"Ta", "Tp", "H", "Pr", "Pw", "Tt", "Kp", "Ki", "Kd"};
+
     private static RunnableSerial instance;
 
     private RunnableSerial() {
@@ -45,9 +47,23 @@ public class RunnableSerial extends Observable implements Runnable {
                         incoming = true;
                         break;
                     case '>':
+                        HashMap<String, Double> hashMap = extractData(res);
                         incoming = false;
-                        setChanged();
-                        notifyObservers(extractData(res));
+
+                        //Test if packet contain all required key
+                        boolean packetComplete = true;
+                        for (String key : requiredKeyList) {
+                            if(!hashMap.containsKey(key)){
+                                packetComplete = false;
+                            }
+                        }
+
+                        // Notify observers
+                        if (packetComplete) {
+                            setChanged();
+                            notifyObservers(extractData(res));
+                        }
+                        
                         break;
                     default:
                         if (incoming) {

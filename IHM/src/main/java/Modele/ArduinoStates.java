@@ -10,7 +10,6 @@ import java.util.*;
 public class ArduinoStates implements Observer{
 
     private Stack<State> stateHistory;
-    private String[] keyList = {"Ta", "Tp", "H", "Pr", "Pw", "Tt", "Kp", "Ki", "Kd"};
 
     public StringProperty propertyTp = new SimpleStringProperty();
 
@@ -34,15 +33,6 @@ public class ArduinoStates implements Observer{
     }
 
     private boolean addState(final HashMap<String, Double> serial){
-
-        //Test empty zone in hash
-        for (String key : keyList) {
-
-            if(!serial.containsKey(key)){
-                return false;
-            }
-        }
-
 
         State state = new State(serial.get("Ta"),
                                 serial.get("Tp"),
