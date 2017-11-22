@@ -37,7 +37,7 @@ void loop() {
   double humidity = getHumidity();
   double tempAmbiant = getTempAmbiant();
 
-Serial.print("Humidite: ");
+/*Serial.print("Humidite: ");
 Serial.print(humidity);
 Serial.print(" \%  ");
 Serial.print("Temperature ambiante: ");
@@ -51,7 +51,37 @@ Serial.print(getOutputVal());
 Serial.print("/255  ");
 Serial.print("Point de rosee: ");
 Serial.print(calcRosee(tempAmbiant, humidity));
-Serial.println(" *C");
+Serial.println(" *C");*/
+
+Serial.print("<");
+Serial.print("Ta:");
+Serial.print(tempAmbiant);
+Serial.print("|");
+Serial.print("Tp:");
+Serial.print(getTemp(ohm));
+Serial.print("|");
+Serial.print("H:");
+Serial.print(humidity);
+Serial.print("|");
+Serial.print("Pr:");
+Serial.print(calcRosee(tempAmbiant, humidity));
+Serial.print("|");
+Serial.print("Pw:");
+Serial.print(getOutputVal());
+Serial.print("|");
+Serial.print("Tt:");
+Serial.print(getSetPoint() * -1);
+Serial.print("|");
+Serial.print("Kp:");
+Serial.print(getKp());
+Serial.print("|");
+Serial.print("Ki:");
+Serial.print(getKi());
+Serial.print("|");
+Serial.print("Kd:");
+Serial.print(getKd());
+Serial.println(">");
+
 
   if (Serial.available() > 0) {
    setSetPoint(Serial.parseInt() * -1);
