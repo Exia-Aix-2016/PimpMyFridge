@@ -29,38 +29,38 @@ public class AppController {
     private Label tempAmbiante;
     @FXML
     private Label pointRosee;
-
+    @FXML
+    private Label H;
 
     //Button
-
-
     @FXML
-    private Button btn_Set_Temp;
+    private Button btn_Set_ConsigneTemp;
     @FXML
-    private Button btn_Reset_Temp;
+    private Button btn_Reset_ConsigneTemp;
     @FXML
-    private Button btn_Set_coefP;
+    private Button btn_Set_Kp;
     @FXML
-    private Button btn_Reset_coefP;
+    private Button btn_Reset_Kp;
     @FXML
-    private Button btn_Set_coefI;
+    private Button btn_Set_Ki;
     @FXML
-    private Button btn_Reset_coefI;
+    private Button btn_Reset_Ki;
     @FXML
-    private Button btn_Set_coefD;
+    private Button btn_Set_Kd;
     @FXML
-    private Button btn_Reset_coefD;
+    private Button btn_Reset_Kd;
 
 
     //Setting param
     @FXML
     private TextField consigneTemp;
     @FXML
-    private TextField coefP;
+    private TextField Kp;
     @FXML
-    private TextField coefI;
+    private TextField Ki;
     @FXML
-    private TextField coefD;
+    private TextField Kd;
+
 
     @FXML
     private LineChart hist;
@@ -82,25 +82,25 @@ public class AppController {
         //BTN LISTERNERS
 
 
-        this.btn_Set_coefI.setOnAction((event) -> {
+        this.btn_Set_Ki.setOnAction((event) -> {
             // TODO: 21/11/2017
         });
-        this.btn_Reset_coefI.setOnAction((event) -> {
-            // TODO: 21/11/2017
-        });
-
-        this.btn_Set_coefP.setOnAction((event) -> {
-            // TODO: 21/11/2017
-        });
-        this.btn_Reset_coefP.setOnAction((event) -> {
+        this.btn_Reset_Ki.setOnAction((event) -> {
             // TODO: 21/11/2017
         });
 
-        this.btn_Set_coefD.setOnAction((event) -> {
+        this.btn_Set_Kp.setOnAction((event) -> {
+            // TODO: 21/11/2017
+        });
+        this.btn_Reset_Kp.setOnAction((event) -> {
+            // TODO: 21/11/2017
+        });
+
+        this.btn_Set_Kd.setOnAction((event) -> {
             // TODO: 21/11/2017
 
         });
-        this.btn_Reset_coefD.setOnAction((event) -> {
+        this.btn_Reset_Kd.setOnAction((event) -> {
             // TODO: 21/11/2017
 
         });
