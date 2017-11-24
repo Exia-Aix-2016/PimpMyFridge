@@ -63,7 +63,7 @@ public class RunnableSerial extends Observable implements Runnable {
                             setChanged();
                             notifyObservers(extractData(res));
                         }
-                        
+
                         break;
                     default:
                         if (incoming) {
@@ -103,7 +103,12 @@ public class RunnableSerial extends Observable implements Runnable {
         for (String s: packet.split("\\|")) {
             String[] kv = s.split(":");
             if (kv.length == 2) {
-                hashMap.put(kv[0], Double.parseDouble(kv[1]));
+                try {
+                    Double val = Double.parseDouble(kv[1]);
+                    hashMap.put(kv[0], val);
+                } catch (Exception e) {
+                    //System.err.println(e);
+                }
             }
         }
 
