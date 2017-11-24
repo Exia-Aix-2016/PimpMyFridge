@@ -10,9 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import Utils.RunnableSerial;
 
-
-
-
+import java.util.HashMap;
 
 
 /**
@@ -21,10 +19,6 @@ import Utils.RunnableSerial;
 public class AppController {
 
     private ArduinoStates arduinoStates;
-
-
-    private static AppController instance;
-
 
     //Displaying data
     @FXML
@@ -80,8 +74,15 @@ public class AppController {
     private Label Kd_actuel;
 
 
+    private HashMap<String, Double> createAnOrder(String key, Double value){
+
+        return null;
+    }
+
     @FXML
     public void initialize() {
+
+ 
 
 
         //Création du modèle arduino.
@@ -98,6 +99,8 @@ public class AppController {
         this.Kp_actuel.textProperty().bind(this.arduinoStates.getPropertyKp());
         this.Ki_actuel.textProperty().bind(this.arduinoStates.getPropertyKi());
         this.Kd_actuel.textProperty().bind(this.arduinoStates.getPropertyKd());
+
+
 
         XYChart.Series series = new XYChart.Series();
 
@@ -145,6 +148,7 @@ public class AppController {
         //Temperature Target
         this.btn_Set_Tt.setOnAction((event) -> {
             RunnableSerial.getInstance().write("<Tt:"+ this.Tt.getText() +">");
+
         });
         this.btn_Reset_Tt.setOnAction((event) -> {
             RunnableSerial.getInstance().write("<Tt:-1>");
