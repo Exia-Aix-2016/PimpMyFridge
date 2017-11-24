@@ -1,17 +1,16 @@
 package ihm;
 
 import Modele.ArduinoStates;
-import javafx.beans.property.DoubleProperty;
+import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
-import javafx.scene.control.*;
-import javafx.util.converter.DoubleStringConverter;
-import javafx.util.converter.IntegerStringConverter;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import Utils.RunnableSerial;
 
-import java.util.Map;
-import java.util.Observable;
-import java.util.Observer;
+import java.util.HashMap;
 
 
 /**
@@ -20,7 +19,6 @@ import java.util.Observer;
 public class AppController {
 
     private ArduinoStates arduinoStates;
-
 
     //Displaying data
     @FXML
@@ -34,9 +32,9 @@ public class AppController {
 
     //Button
     @FXML
-    private Button btn_Set_ConsigneTemp;
+    private Button btn_Set_Tt;
     @FXML
-    private Button btn_Reset_ConsigneTemp;
+    private Button btn_Reset_Tt;
     @FXML
     private Button btn_Set_Kp;
     @FXML
@@ -53,7 +51,8 @@ public class AppController {
 
     //Setting param
     @FXML
-    private TextField consigneTemp;
+    public TextField Tt;
+
     @FXML
     private TextField Kp;
     @FXML
@@ -65,9 +64,26 @@ public class AppController {
     @FXML
     private LineChart hist;
 
+    @FXML
+    private Label Tt_actuel;
+    @FXML
+    private Label Kp_actuel;
+    @FXML
+    private Label Ki_actuel;
+    @FXML
+    private Label Kd_actuel;
+
+
+    private HashMap<String, Double> createAnOrder(String key, Double value){
+
+        return null;
+    }
 
     @FXML
     public void initialize() {
+
+
+
 
         //Création du modèle arduino.
         this.arduinoStates = ArduinoStates.getArduinoStates();
@@ -79,34 +95,61 @@ public class AppController {
         this.Ta.textProperty().bind(this.arduinoStates.getPropertyTa());
         this.Pr.textProperty().bind(this.arduinoStates.getPropertyPr());
 
+        this.Tt_actuel.textProperty().bind(this.arduinoStates.getPropertyTt());
+        this.Kp_actuel.textProperty().bind(this.arduinoStates.getPropertyKp());
+        this.Ki_actuel.textProperty().bind(this.arduinoStates.getPropertyKi());
+        this.Kd_actuel.textProperty().bind(this.arduinoStates.getPropertyKd());
 
 
 
+        XYChart.Series series = new XYChart.Series();
 
-        //BTN LISTERNERS
+        series.setName("Temp");
+        this.hist.getData().add(series);
+
+        this.arduinoStates.getSerieTp().addListener((ListChangeListener.Change<? extends XYChart.Data> c) -> {
+            c.next();
+            if (c.wasAdded()) {
+                for (XYChart.Data added: c.getAddedSubList()) {
+                    series.getData().add(added);
+                }
+            }
+        });
 
 
+        //BTN LISTERNERS/Send Order
+
+        //PID : Ki
         this.btn_Set_Ki.setOnAction((event) -> {
-            // TODO: 21/11/2017
+            RunnableSerial.getInstance().write("<Ki:"+ this.Ki.getText()+">");
         });
         this.btn_Reset_Ki.setOnAction((event) -> {
-            // TODO: 21/11/2017
+            RunnableSerial.getInstance().write("<Ki:-1>");
         });
 
+        //PID : Kp
         this.btn_Set_Kp.setOnAction((event) -> {
-            // TODO: 21/11/2017
+            RunnableSerial.getInstance().write("<Kp:"+ this.Kp.getText() +">");
         });
         this.btn_Reset_Kp.setOnAction((event) -> {
-            // TODO: 21/11/2017
+            RunnableSerial.getInstance().write("<Kp:-1>");
         });
 
+        //PID : Kd
         this.btn_Set_Kd.setOnAction((event) -> {
-            // TODO: 21/11/2017
-
+            RunnableSerial.getInstance().write("<Kd:"+ this.Kd.getText()+">");
         });
         this.btn_Reset_Kd.setOnAction((event) -> {
-            // TODO: 21/11/2017
+            RunnableSerial.getInstance().write("<Kd:-1>");
+        });
 
+        //Temperature Target
+        this.btn_Set_Tt.setOnAction((event) -> {
+            RunnableSerial.getInstance().write("<Tt:"+ this.Tt.getText() +">");
+
+        });
+        this.btn_Reset_Tt.setOnAction((event) -> {
+            RunnableSerial.getInstance().write("<Tt:-1>");
         });
 
     }

@@ -3,8 +3,14 @@ package Modele;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.chart.XYChart;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Observable;
+import java.util.Observer;
+import java.util.Stack;
 
 
 public class ArduinoStates implements Observer{
@@ -21,11 +27,15 @@ public class ArduinoStates implements Observer{
     private StringProperty propertyKi = new SimpleStringProperty();
     private StringProperty propertyKd = new SimpleStringProperty();
 
+    private ObservableList<XYChart.Data> serieTp = FXCollections.observableArrayList();
+
 
     private static ArduinoStates instance;
 
     private ArduinoStates(){
+
         this.stateHistory = new Stack<>();
+
     }
 
     public static ArduinoStates getArduinoStates() {
@@ -44,6 +54,8 @@ public class ArduinoStates implements Observer{
     }
 
     private boolean addState(final HashMap<String, Double> serial){
+
+        System.out.println(serial);
 
         State state = new State(serial.get("Ta"),
                                 serial.get("Tp"),
@@ -66,6 +78,8 @@ public class ArduinoStates implements Observer{
             this.propertyPr.setValue(String.valueOf(state.getPr()));
             this.propertyPw.setValue(String.valueOf(state.getPw()));
             this.propertyTt.setValue(String.valueOf(state.getTt()));
+
+            this.serieTp.add(new XYChart.Data<>(state.getTime().toString(), state.getTp()));
         });
 
         this.stateHistory.push(state);
@@ -95,5 +109,23 @@ public class ArduinoStates implements Observer{
 
     public StringProperty getPropertyPr() {
         return this.propertyPr;
+    }
+
+    public StringProperty getPropertyTt() {
+        return this.propertyTt;
+    }
+
+    public StringProperty getPropertyKp() {
+        return propertyKp;
+    }
+    public StringProperty getPropertyKi() {
+        return propertyKi;
+    }
+    public StringProperty getPropertyKd() {
+        return propertyKd;
+    }
+
+    public ObservableList<XYChart.Data> getSerieTp() {
+        return serieTp;
     }
 }

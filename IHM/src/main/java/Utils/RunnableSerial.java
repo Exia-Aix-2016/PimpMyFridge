@@ -1,3 +1,5 @@
+package Utils;
+
 import com.fazecast.jSerialComm.SerialPort;
 
 import java.io.IOException;
@@ -18,12 +20,17 @@ public class RunnableSerial extends Observable implements Runnable {
     private static RunnableSerial instance;
 
     private RunnableSerial() {
-        comPort = SerialPort.getCommPorts()[0];
-        comPort.openPort();
-        comPort.setComPortTimeouts(SerialPort.TIMEOUT_NONBLOCKING, 0, 0);
+        SerialPort[] comPorts = SerialPort.getCommPorts();
+        if (comPorts.length > 0) {
+            comPort = SerialPort.getCommPorts()[0];
+            comPort.openPort();
+            comPort.setComPortTimeouts(SerialPort.TIMEOUT_NONBLOCKING, 0, 0);
 
-        out = comPort.getOutputStream();
-        in = comPort.getInputStream();
+            out = comPort.getOutputStream();
+            in = comPort.getInputStream();
+        } else {
+            System.err.println("No com port please restart the app");
+        }
     }
 
     public static RunnableSerial getInstance() {
@@ -63,7 +70,7 @@ public class RunnableSerial extends Observable implements Runnable {
                             setChanged();
                             notifyObservers(extractData(res));
                         }
-                        
+
                         break;
                     default:
                         if (incoming) {
@@ -76,16 +83,16 @@ public class RunnableSerial extends Observable implements Runnable {
             e.printStackTrace();
         }
     }
-
-    void write(String s) {
+    public void write(String s) {
         try {
             out.write(s.getBytes());
+
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    void stop() {
+    public void stop() {
         exit = true;
     }
 
@@ -103,7 +110,12 @@ public class RunnableSerial extends Observable implements Runnable {
         for (String s: packet.split("\\|")) {
             String[] kv = s.split(":");
             if (kv.length == 2) {
-                hashMap.put(kv[0], Double.parseDouble(kv[1]));
+                try {
+                    Double val = Double.parseDouble(kv[1]);
+                    hashMap.put(kv[0], val);
+                } catch (Exception e) {
+                    //System.err.println(e);
+                }
             }
         }
 
