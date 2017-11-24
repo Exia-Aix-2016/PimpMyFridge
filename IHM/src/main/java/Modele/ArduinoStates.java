@@ -82,6 +82,10 @@ public class ArduinoStates implements Observer{
 
         this.stateHistory.push(state);
 
+        if (stateHistory.size() > 150) {
+            stateHistory.remove(0);
+        }
+
         return true;
     }
 

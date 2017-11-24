@@ -149,6 +149,12 @@ public class AppController {
                     if (added.tick > TickResolution) {
                         XAxis.setLowerBound(added.tick-TickResolution);
                         XAxis.setUpperBound(added.tick);
+
+                        serieTa.getData().remove(0, 1);
+                        serieTp.getData().remove(0, 1);
+                        serieH.getData().remove(0, 1);
+                        seriePr.getData().remove(0, 1);
+                        seriePw.getData().remove(0, 1);
                     }
                 }
             }
