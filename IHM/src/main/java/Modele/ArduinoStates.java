@@ -116,7 +116,6 @@ public class ArduinoStates implements Observer{
         return propertyKi;
     }
     public StringProperty getPropertyKd() {
-        System.out.printf(propertyKd.get());
         return propertyKd;
     }
 }
