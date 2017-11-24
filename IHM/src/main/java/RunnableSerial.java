@@ -18,12 +18,17 @@ public class RunnableSerial extends Observable implements Runnable {
     private static RunnableSerial instance;
 
     private RunnableSerial() {
-        comPort = SerialPort.getCommPorts()[0];
-        comPort.openPort();
-        comPort.setComPortTimeouts(SerialPort.TIMEOUT_NONBLOCKING, 0, 0);
+        SerialPort[] comPorts = SerialPort.getCommPorts();
+        if (comPorts.length > 0) {
+            comPort = SerialPort.getCommPorts()[0];
+            comPort.openPort();
+            comPort.setComPortTimeouts(SerialPort.TIMEOUT_NONBLOCKING, 0, 0);
 
-        out = comPort.getOutputStream();
-        in = comPort.getInputStream();
+            out = comPort.getOutputStream();
+            in = comPort.getInputStream();
+        } else {
+            System.err.println("No com port please restart the app");
+        }
     }
 
     public static RunnableSerial getInstance() {
