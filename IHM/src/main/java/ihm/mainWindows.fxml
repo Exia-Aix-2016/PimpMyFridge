@@ -38,7 +38,6 @@
                   <HBox prefHeight="36.0" prefWidth="157.0" spacing="15.0">
                      <children>
                         <Button fx:id="btn_Set_Tt" mnemonicParsing="false" text="Appliquer" />
-                        <Button fx:id="btn_Reset_Tt" mnemonicParsing="false" text="Reset" />
                      </children>
                   </HBox>
                </children>
@@ -59,7 +58,6 @@
                         <Label fx:id="Kp_actuel" text="0.0" />
                         <TextField fx:id="Kp" />
                         <Button fx:id="btn_Set_Kp" mnemonicParsing="false" text="Appliquer" />
-                        <Button fx:id="btn_Reset_Kp" mnemonicParsing="false" text="Reset" />
                      </children>
                   </HBox>
                   <HBox prefHeight="50.0" prefWidth="326.0" spacing="10.0">
@@ -69,7 +67,6 @@
                         <HBox prefHeight="49.0" prefWidth="30.0" />
                         <TextField fx:id="Ki" />
                         <Button fx:id="btn_Set_Ki" mnemonicParsing="false" text="Appliquer" />
-                        <Button fx:id="btn_Reset_Ki" mnemonicParsing="false" text="Reset" />
                      </children>
                   </HBox>
                   <HBox prefHeight="50.0" prefWidth="326.0" spacing="10.0">
@@ -79,7 +76,6 @@
                         <HBox prefHeight="100.0" prefWidth="30.0" />
                         <TextField fx:id="Kd" />
                         <Button fx:id="btn_Set_Kd" mnemonicParsing="false" text="Appliquer" />
-                        <Button fx:id="btn_Reset_Kd" mnemonicParsing="false" text="Reset" />
                      </children>
                   </HBox>
                </children>

@@ -36,20 +36,15 @@ public class AppController {
     //Button
     @FXML
     private Button btn_Set_Tt;
-    @FXML
-    private Button btn_Reset_Tt;
+
     @FXML
     private Button btn_Set_Kp;
-    @FXML
-    private Button btn_Reset_Kp;
+
     @FXML
     private Button btn_Set_Ki;
-    @FXML
-    private Button btn_Reset_Ki;
+
     @FXML
     private Button btn_Set_Kd;
-    @FXML
-    private Button btn_Reset_Kd;
 
 
     //Setting param
@@ -169,33 +164,21 @@ public class AppController {
             RunnableSerial.getInstance().write("<Ki:"+ this.Ki.getText()+">");
             System.out.println(this.Ki.getText());
         });
-        this.btn_Reset_Ki.setOnAction((event) -> {
-            RunnableSerial.getInstance().write("<Ki:-1>");
-        });
 
         //PID : Kp
         this.btn_Set_Kp.setOnAction((event) -> {
             RunnableSerial.getInstance().write("<Kp:"+ this.Kp.getText() +">");
-        });
-        this.btn_Reset_Kp.setOnAction((event) -> {
-            RunnableSerial.getInstance().write("<Kp:-1>");
         });
 
         //PID : Kd
         this.btn_Set_Kd.setOnAction((event) -> {
             RunnableSerial.getInstance().write("<Kd:"+ this.Kd.getText()+">");
         });
-        this.btn_Reset_Kd.setOnAction((event) -> {
-            RunnableSerial.getInstance().write("<Kd:-1>");
-        });
 
         //Temperature Target
         this.btn_Set_Tt.setOnAction((event) -> {
             RunnableSerial.getInstance().write("<Tt:"+ this.Tt.getText() +">");
 
-        });
-        this.btn_Reset_Tt.setOnAction((event) -> {
-            RunnableSerial.getInstance().write("<Tt:-1>");
         });
 
     }
