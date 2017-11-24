@@ -82,7 +82,7 @@ public class AppController {
     @FXML
     public void initialize() {
 
- 
+
 
 
         //Création du modèle arduino.
@@ -117,9 +117,7 @@ public class AppController {
         });
 
 
-        //BTN LISTERNERS
-
-
+        //BTN LISTERNERS/Send Order
 
         //PID : Ki
         this.btn_Set_Ki.setOnAction((event) -> {
