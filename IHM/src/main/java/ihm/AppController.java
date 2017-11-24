@@ -1,18 +1,13 @@
 package ihm;
 
 import Modele.ArduinoStates;
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.StringProperty;
+import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
-import javafx.scene.control.*;
-import javafx.util.converter.DoubleStringConverter;
-import javafx.util.converter.IntegerStringConverter;
-
-import java.util.Map;
-import java.util.Observable;
-import java.util.Observer;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 
 
 /**
@@ -97,7 +92,19 @@ public class AppController {
         this.Ki_actuel.textProperty().bind(this.arduinoStates.getPropertyKi());
         this.Kd_actuel.textProperty().bind(this.arduinoStates.getPropertyKd());
 
+        XYChart.Series series = new XYChart.Series();
 
+        series.setName("Temp");
+        this.hist.getData().add(series);
+
+        this.arduinoStates.getSerieTp().addListener((ListChangeListener.Change<? extends XYChart.Data> c) -> {
+            c.next();
+            if (c.wasAdded()) {
+                for (XYChart.Data added: c.getAddedSubList()) {
+                    series.getData().add(added);
+                }
+            }
+        });
 
 
         //BTN LISTERNERS

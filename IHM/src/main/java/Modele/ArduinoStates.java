@@ -1,11 +1,16 @@
 package Modele;
 
-import ihm.AppController;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.chart.XYChart;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Observable;
+import java.util.Observer;
+import java.util.Stack;
 
 
 public class ArduinoStates implements Observer{
@@ -22,6 +27,7 @@ public class ArduinoStates implements Observer{
     private StringProperty propertyKi = new SimpleStringProperty();
     private StringProperty propertyKd = new SimpleStringProperty();
 
+    private ObservableList<XYChart.Data> serieTp = FXCollections.observableArrayList();
 
 
     private static ArduinoStates instance;
@@ -49,6 +55,8 @@ public class ArduinoStates implements Observer{
 
     private boolean addState(final HashMap<String, Double> serial){
 
+        System.out.println(serial);
+
         State state = new State(serial.get("Ta"),
                                 serial.get("Tp"),
                                 serial.get("H"),
@@ -71,9 +79,7 @@ public class ArduinoStates implements Observer{
             this.propertyPw.setValue(String.valueOf(state.getPw()));
             this.propertyTt.setValue(String.valueOf(state.getTt()));
 
-            //System.out.println(serial.get("Kd"));
-
-
+            this.serieTp.add(new XYChart.Data<>(state.getTime().toString(), state.getTp()));
         });
 
         this.stateHistory.push(state);
@@ -117,5 +123,9 @@ public class ArduinoStates implements Observer{
     }
     public StringProperty getPropertyKd() {
         return propertyKd;
+    }
+
+    public ObservableList<XYChart.Data> getSerieTp() {
+        return serieTp;
     }
 }
