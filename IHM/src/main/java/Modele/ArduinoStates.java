@@ -5,10 +5,11 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.chart.XYChart;
 
-import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Observable;
+import java.util.Observer;
+import java.util.Stack;
 
 
 public class ArduinoStates implements Observer{

@@ -1,8 +1,6 @@
 package Modele;
 
-import javafx.beans.property.DoubleProperty;
-
-import java.time.*;
+import java.time.Instant;
  public class State {
 
 

@@ -12,7 +12,7 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="1297.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ihm.AppController">
    <center>
-      <LineChart fx:id="hist" prefHeight="291.0" prefWidth="975.0" BorderPane.alignment="CENTER">
+      <LineChart fx:id="hist" createSymbols="false" prefHeight="291.0" prefWidth="975.0" verticalGridLinesVisible="false" BorderPane.alignment="CENTER">
         <xAxis>
           <NumberAxis side="BOTTOM" />
         </xAxis>

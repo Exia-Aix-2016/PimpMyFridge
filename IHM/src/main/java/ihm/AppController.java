@@ -2,18 +2,15 @@ package ihm;
 
 import Modele.ArduinoStates;
 import Modele.ChartData;
-import javafx.collections.FXCollections;
+import Utils.RunnableSerial;
 import javafx.collections.ListChangeListener;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import Utils.RunnableSerial;
 
 import java.util.HashMap;
 

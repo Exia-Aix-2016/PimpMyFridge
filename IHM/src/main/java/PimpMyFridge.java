@@ -1,11 +1,11 @@
 import Modele.ArduinoStates;
 import Utils.RunnableSerial;
+import ihm.AppController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import ihm.AppController;
 import javafx.stage.WindowEvent;
 
 import java.io.IOException;
