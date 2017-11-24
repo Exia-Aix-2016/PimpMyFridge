@@ -161,23 +161,54 @@ public class AppController {
 
         //PID : Ki
         this.btn_Set_Ki.setOnAction((event) -> {
-            RunnableSerial.getInstance().write("<Ki:"+ this.Ki.getText()+">");
-            System.out.println(this.Ki.getText());
-        });
+            String txt = this.Ki.getText();
+            try {
+                Double val = Double.parseDouble(txt);
+                if (val >= 0) {
+                    RunnableSerial.getInstance().write("<Ki:"+txt+">");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+    });
 
         //PID : Kp
         this.btn_Set_Kp.setOnAction((event) -> {
-            RunnableSerial.getInstance().write("<Kp:"+ this.Kp.getText() +">");
+            String txt = this.Kp.getText();
+            try {
+                Double val = Double.parseDouble(txt);
+                if (val >= 0) {
+                    RunnableSerial.getInstance().write("<Kp:"+txt+">");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         });
 
         //PID : Kd
         this.btn_Set_Kd.setOnAction((event) -> {
-            RunnableSerial.getInstance().write("<Kd:"+ this.Kd.getText()+">");
+            String txt = this.Kd.getText();
+            try {
+                Double val = Double.parseDouble(txt);
+                if (val >= 0) {
+                    RunnableSerial.getInstance().write("<Kd:"+txt+">");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         });
 
         //Temperature Target
         this.btn_Set_Tt.setOnAction((event) -> {
-            RunnableSerial.getInstance().write("<Tt:"+ this.Tt.getText() +">");
+            String txt = this.Tt.getText();
+            try {
+                Double val = Double.parseDouble(txt);
+                if (val >= 0) {
+                    RunnableSerial.getInstance().write("<Tt:"+txt+">");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
         });
 
