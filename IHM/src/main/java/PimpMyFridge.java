@@ -1,4 +1,5 @@
 import Modele.ArduinoStates;
+import Utils.RunnableSerial;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -9,8 +10,6 @@ import javafx.stage.WindowEvent;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.Observable;
 
 public class PimpMyFridge extends Application {
 
@@ -26,7 +25,7 @@ public class PimpMyFridge extends Application {
         RunnableSerial rs = RunnableSerial.getInstance();
         rs.addObserver(ArduinoStates.getArduinoStates());
 
-        // Start RunnableSerial Thread
+        // Start Utils.RunnableSerial Thread
         Thread runnableSerialThread = new Thread(rs);
         runnableSerialThread.start();
 

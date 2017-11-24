@@ -8,6 +8,11 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import Utils.RunnableSerial;
+
+
+
+
 
 
 /**
@@ -16,6 +21,8 @@ import javafx.scene.control.TextField;
 public class AppController {
 
     private ArduinoStates arduinoStates;
+
+
     private static AppController instance;
 
 
@@ -31,9 +38,9 @@ public class AppController {
 
     //Button
     @FXML
-    private Button btn_Set_ConsigneTemp;
+    private Button btn_Set_Tt;
     @FXML
-    private Button btn_Reset_ConsigneTemp;
+    private Button btn_Reset_Tt;
     @FXML
     private Button btn_Set_Kp;
     @FXML
@@ -110,27 +117,37 @@ public class AppController {
         //BTN LISTERNERS
 
 
+
+        //PID : Ki
         this.btn_Set_Ki.setOnAction((event) -> {
-            // TODO: 21/11/2017
+            RunnableSerial.getInstance().write("<Ki:"+ this.Ki.getText()+">");
         });
         this.btn_Reset_Ki.setOnAction((event) -> {
-            // TODO: 21/11/2017
+            RunnableSerial.getInstance().write("<Ki:-1>");
         });
 
+        //PID : Kp
         this.btn_Set_Kp.setOnAction((event) -> {
-            // TODO: 21/11/2017
+            RunnableSerial.getInstance().write("<Kp:"+ this.Kp.getText() +">");
         });
         this.btn_Reset_Kp.setOnAction((event) -> {
-            // TODO: 21/11/2017
+            RunnableSerial.getInstance().write("<Kp:-1>");
         });
 
+        //PID : Kd
         this.btn_Set_Kd.setOnAction((event) -> {
-            // TODO: 21/11/2017
-
+            RunnableSerial.getInstance().write("<Kd:"+ this.Kd.getText()+">");
         });
         this.btn_Reset_Kd.setOnAction((event) -> {
-            // TODO: 21/11/2017
+            RunnableSerial.getInstance().write("<Kd:-1>");
+        });
 
+        //Temperature Target
+        this.btn_Set_Tt.setOnAction((event) -> {
+            RunnableSerial.getInstance().write("<Tt:"+ this.Tt.getText() +">");
+        });
+        this.btn_Reset_Tt.setOnAction((event) -> {
+            RunnableSerial.getInstance().write("<Tt:-1>");
         });
 
     }

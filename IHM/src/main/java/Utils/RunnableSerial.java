@@ -1,3 +1,5 @@
+package Utils;
+
 import com.fazecast.jSerialComm.SerialPort;
 
 import java.io.IOException;
@@ -82,7 +84,7 @@ public class RunnableSerial extends Observable implements Runnable {
         }
     }
 
-    void write(String s) {
+    public void write(String s) {
         try {
             out.write(s.getBytes());
         } catch (Exception e) {
@@ -90,7 +92,7 @@ public class RunnableSerial extends Observable implements Runnable {
         }
     }
 
-    void stop() {
+    public void stop() {
         exit = true;
     }
 
