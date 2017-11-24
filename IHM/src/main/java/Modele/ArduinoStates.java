@@ -53,8 +53,6 @@ public class ArduinoStates implements Observer{
 
     private boolean addState(final HashMap<String, Double> serial){
 
-        System.out.println(serial);
-
         State state = new State(serial.get("Ta"),
                                 serial.get("Tp"),
                                 serial.get("H"),
