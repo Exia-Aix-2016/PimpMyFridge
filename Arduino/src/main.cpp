@@ -4,6 +4,8 @@
 #include "pid.h"
 #include "main.h"
 
+
+
 float getTemp(float ohm);
 int getPreviousIndex(float coef);
 int getNextIndex(float coef);
@@ -17,79 +19,36 @@ float refTemp[21] = {0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 7
 float coefs[21] = {2.8665, 2.2907, 1.8438, 1.492, 1.2154, 1.0, 0.82976, 0.68635, 0.57103, 0.48015, 0.40545, 0.3417, 0.28952, 0.24714, 0.21183, 0.18194, 0.1568, 0.13592, 0.11822, 0.1034, 0.090741};
 char orders[4][5]={"Tt","Kp","Ki","Kd"};
 
-void receiveDatas(){
+Order receiveDatas(){
+  Order Sorder;
   int numbOfData = Serial.available();
-  char charRead[numbOfData];
-  bool openedOrder = false;
-  char value;
-  char order[32];
-  char valu[32];
-  int sizeOrder = 0;
-  int sizeValue = 0;
-  int cursor = 0;
+  if(numbOfData > 0){
+    String trame = "";
+    for(int i = 0; i < numbOfData; i++){
+      trame += (char)Serial.read();
+    }
 
-  for(int i = 0; i < numbOfData; i++){
-    charRead[i] = Serial.read();
+    if(trame.charAt(0) == '<'){
+
+      int cursor = 0;
+      String order, value;
+
+      for(int i = 1; i < trame.length() && trame.charAt(i) != ':'; i++){
+        order += trame.charAt(i);
+        cursor++;
+      }
+      cursor += 2;
+      Sorder.ord = order;
+
+      for(int i = cursor; i < trame.length() && trame.charAt(i) != '>'; i++){
+        value += trame.charAt(i);
+        cursor++;
+      }
+      Sorder.value = value.toDouble();
+    }
   }
-
-  if(charRead[0] == '<'){
-    openedOrder = true;
-    cursor = 1;
-  }
-
-
-
-  if(openedOrder == true){
-    String orderStr = "";
-    String valueStr = "";
-
-    int k=0;
-    for(int i=cursor; charRead[i] != ':'; i++){
-      order[k] = charRead[i];
-      cursor++;
-      sizeOrder++;
-      k++;
-
-
-      Serial.println("Ok2");
-    }
-    cursor++;
-    for(int i=0; i < sizeOrder; i++){
-      orderStr = orderStr + order[i];
-      Serial.println("Ok3");
-    }
-
-    int j=0;
-    for(int i=cursor; charRead[i] != '>'; i++){
-      Serial.println("Ok4");
-      valu[j] = charRead[i];
-      sizeValue++;
-      j++;
-    }
-    for(int i=0; i < sizeValue; i++){
-      Serial.println("Ok5");
-      valueStr = valueStr + valu[i];
-    }
-
-    double valueDbl = valueStr.toDouble();
-
-
-
-    Serial.print(orderStr);
-    Serial.print(" ");
-    Serial.println(valueDbl);
-    Serial.println("Ok6");
-
-
-    if(orderStr == orders[0]){
-      Serial.println("Order tt");
-    }
-
-  }
-
-
+  return Sorder;
 }
-
 
 void setup() {
   pinMode(fridge, OUTPUT);
@@ -109,10 +68,21 @@ void loop() {
 
   scanDHT();
 
-  receiveDatas();
 
+//RECEPTION
+  Order ordre = receiveDatas();
+  if(ordre.ord == "Tt"){
+    setTargetTemp(ordre.value);
+  }else if(ordre.ord == "Kp"){
+    setkp(ordre.value);
+  }else if(ordre.ord == "Ki"){
+    setki(ordre.value);
+  }else if(ordre.ord == "Kd"){
+    setkd(ordre.value);
+  }
 
-/*Serial.print("<");
+//ENVOIE
+Serial.print("<");
 Serial.print("Ta:");
 Serial.print(tempAmbiant);
 Serial.print("|");
@@ -129,7 +99,7 @@ Serial.print("Pw:");
 Serial.print(getOutputVal());
 Serial.print("|");
 Serial.print("Tt:");
-Serial.print(getSetPoint() * -1);
+Serial.print(getTargetTemp());
 Serial.print("|");
 Serial.print("Kp:");
 Serial.print(getKp());
@@ -138,16 +108,12 @@ Serial.print("Ki:");
 Serial.print(getKi());
 Serial.print("|");
 Serial.print("Kd:");
-Serial.print(getKd());
-Serial.println(">");*/
+Serial.print(getKd(), 5);
+Serial.println(">");
 
 
-  if (Serial.available() > 0) {
-   setTargetTemp(Serial.parseInt());
-   setSetPoint(getTargetTemp());
- }else if(calcRosee(tempAmbiant, humidity) > getTargetTemp()){
+ if(calcRosee(tempAmbiant, humidity) > getTargetTemp()){
    setSetPoint(calcRosee(tempAmbiant, humidity));
-
  }else{
    setSetPoint(getTargetTemp());
  }

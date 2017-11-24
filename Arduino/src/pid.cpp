@@ -3,10 +3,9 @@
 
 #define OUTPUT_MIN 0
 #define OUTPUT_MAX 255
-#define KP 250
-#define KI 1.5
-#define KD 0.001
-
+double KP = 250;
+double KI = 1.5;
+double KD = 0.001;
 double tempPlaque, outputVal;
 double setPoint = 0;
 double targetTemp = 12;
@@ -48,6 +47,16 @@ double getKi(){
 
 double getKd(){
   return KD;
+}
+
+void setkp(const double p){
+  KP = p;
+}
+void setki(const double i){
+  KI = i;
+}
+void setkd(const double d){
+  KD = d;
 }
 
 void setTargetTemp(double targetTempIn){

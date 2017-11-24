@@ -12,6 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
+import javax.sound.midi.Soundbank;
 import java.util.HashMap;
 
 
@@ -166,6 +167,7 @@ public class AppController {
         //PID : Ki
         this.btn_Set_Ki.setOnAction((event) -> {
             RunnableSerial.getInstance().write("<Ki:"+ this.Ki.getText()+">");
+            System.out.println(this.Ki.getText());
         });
         this.btn_Reset_Ki.setOnAction((event) -> {
             RunnableSerial.getInstance().write("<Ki:-1>");

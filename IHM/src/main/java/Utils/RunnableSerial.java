@@ -86,7 +86,6 @@ public class RunnableSerial extends Observable implements Runnable {
     public void write(String s) {
         try {
             out.write(s.getBytes());
-
         } catch (Exception e) {
             e.printStackTrace();
         }
