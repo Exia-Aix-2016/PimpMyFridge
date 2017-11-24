@@ -48,7 +48,7 @@
                <children>
                   <HBox prefHeight="33.0" prefWidth="326.0">
                      <children>
-                        <Label fx:id="label_Title_PID_Param" text="Réglage PID" />
+                        <Label text="Réglage PID" />
                      </children>
                      <padding>
                         <Insets left="187.0" />
@@ -56,7 +56,7 @@
                   </HBox>
                   <HBox prefHeight="50.0" prefWidth="326.0" spacing="10.0">
                      <children>
-                        <Label fx:id="label_PID_P" text="Proportionnalité :" />
+                        <Label text="Proportionnalité :" />
                         <Label fx:id="Kp_actuel" text="0.0" />
                         <TextField fx:id="Kp" />
                         <Button fx:id="btn_Set_Kp" mnemonicParsing="false" text="Appliquer" />
@@ -65,7 +65,7 @@
                   </HBox>
                   <HBox prefHeight="50.0" prefWidth="326.0" spacing="10.0">
                      <children>
-                        <Label fx:id="label_PID_I" text="Intégralité :" />
+                        <Label text="Intégralité :" />
                         <Label fx:id="Ki_actuel" text="0.0" />
                         <HBox prefHeight="49.0" prefWidth="30.0" />
                         <TextField fx:id="Ki" />
@@ -75,7 +75,7 @@
                   </HBox>
                   <HBox prefHeight="50.0" prefWidth="326.0" spacing="10.0">
                      <children>
-                        <Label fx:id="label_PID_D" text="Dérivation :" />
+                        <Label text="Dérivation :" />
                         <Label fx:id="Kd_actuel" text="0.0" />
                         <HBox prefHeight="100.0" prefWidth="30.0" />
                         <TextField fx:id="Kd" />
@@ -96,14 +96,14 @@
          <children>
             <HBox prefHeight="39.0" prefWidth="223.0" spacing="5.0">
                <children>
-                  <Label fx:id="Label_H" text="Humidité :" />
+                  <Label text="Humidité :" />
                   <Label fx:id="H" text="0" />
                   <Label text="\%" />
                </children>
             </HBox>
             <HBox prefHeight="39.0" prefWidth="261.0" spacing="5.0">
                <children>
-                  <Label fx:id="label_Tp" text="Température Plaque :" />
+                  <Label text="Température Plaque :" />
                   <Label fx:id="Tp" text="0.0" />
                   <Label text="°C" />
                </children>
