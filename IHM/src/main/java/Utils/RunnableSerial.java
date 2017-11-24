@@ -8,6 +8,10 @@ import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Observable;
 
+/**
+ * Permet I/O avec l'arduino via le port série
+ * @see com.fazecast.jSerialComm
+ */
 public class RunnableSerial extends Observable implements Runnable {
 
     private SerialPort comPort;

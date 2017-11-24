@@ -17,7 +17,7 @@ import java.util.HashMap;
 
 
 /**
- * Controller de l'application
+ * Controller de la vue de l'application
  */
 public class AppController {
 
@@ -74,16 +74,13 @@ public class AppController {
     //private ObservableList<String> XaxisCategories = FXCollections.observableArrayList();
     private int TickResolution = 100;
 
-    private HashMap<String, Double> createAnOrder(String key, Double value){
 
-        return null;
-    }
-
+    /**
+     * Initialisation IHM
+     * @see javafx
+     * */
     @FXML
     public void initialize() {
-
-
-
 
         //Création du modèle arduino.
         this.arduinoStates = ArduinoStates.getArduinoStates();

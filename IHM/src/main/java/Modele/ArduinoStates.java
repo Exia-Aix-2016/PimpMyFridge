@@ -11,7 +11,15 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.Stack;
 
-
+/**
+ * Gestionnaire des états de l'arduino
+ * Chaque changement d'état de l'arduino (température, humidité, etc...)
+ * est géré par ce Gestionnaire.
+ * Il s'agit d'un observer qui observera RunnableSerial
+ * @see State
+ * @see Observer
+ * @see Utils.RunnableSerial
+ * */
 public class ArduinoStates implements Observer{
 
     private Stack<State> stateHistory;
@@ -31,28 +39,42 @@ public class ArduinoStates implements Observer{
     private static ArduinoStates instance;
 
     private ArduinoStates(){
-
         this.stateHistory = new Stack<>();
-
     }
 
+    /**
+     * Il s'agit d'un Singleton
+     * @return l'instance ArduinoStates.
+     */
     public static ArduinoStates getArduinoStates() {
         if (ArduinoStates.instance == null) {
             ArduinoStates.instance = new ArduinoStates();
         }
-
         return ArduinoStates.instance;
     }
 
+    /**
+     * Quand l'arduino emet des données l'observable RunnableSerial les récupère et
+     * notifiera l'arduinoState qui créera un nouvel etat
+     * @see Utils.RunnableSerial
+     * @see Observer
+     * @see Observable
+     * @param o objet observé
+     * @param arg données envoyé par l'observable
+     */
     @Override
     public void update(Observable o, Object arg) {
-
             this.addState((HashMap<String, Double>) arg);
-
     }
 
+    /**
+     * Permet de rajouter un Etat. (permettra d'avoir un historique des mesures de l'arduino)
+     * @param serial Données serialisé de l'arduino
+     * @return true si l'intégrité des données est vérifiée.
+     */
     private boolean addState(final HashMap<String, Double> serial){
 
+        //Création du nouveau state.
         State state = new State(serial.get("Ta"),
                                 serial.get("Tp"),
                                 serial.get("H"),
@@ -87,9 +109,18 @@ public class ArduinoStates implements Observer{
         return true;
     }
 
+    /**
+     * @return Le dernier état enregistré.
+     */
     public final State getState(){
         return this.stateHistory.peek();
     }
+
+    /**
+     *
+     * @param index de l'état souhaité
+     * @return l'état à l'index indiqué.
+     */
     @org.jetbrains.annotations.Contract(pure = true)
     public final State getState(final int index){
         return this.stateHistory.get(index);
@@ -97,34 +128,72 @@ public class ArduinoStates implements Observer{
 
 
     //GETTER
+    /**
+     * @return Température ambiante
+     * @see StringProperty
+     */
     public StringProperty getPropertyTa() {
         return this.propertyTa;
     }
+    /**
+     * @return Température plaque
+     * @see StringProperty
+     */
     public StringProperty getPropertyTp() {
         return this.propertyTp;
     }
+    /**
+     * @return Humidité
+     * @see StringProperty
+     */
     public StringProperty getPropertyH() {
         return this.propertyH;
     }
 
+    /**
+     * @return Point de rosée
+     * @see StringProperty
+     */
     public StringProperty getPropertyPr() {
         return this.propertyPr;
     }
 
+    /**
+     * @return Température cible
+     * @see StringProperty
+     */
     public StringProperty getPropertyTt() {
         return this.propertyTt;
     }
 
+    /**
+     * @return PID : coefficient p
+     * @see StringProperty
+     */
     public StringProperty getPropertyKp() {
         return propertyKp;
     }
+    /**
+     * @return PID : coefficient i
+     * @see StringProperty
+     */
     public StringProperty getPropertyKi() {
         return propertyKi;
     }
+    /**
+     * @return PID : coefficient d
+     * @see StringProperty
+     */
     public StringProperty getPropertyKd() {
         return propertyKd;
     }
 
+    /**
+     * @return Une liste de données observable permettant de dessiner les données sur le graphique.
+     * @see StringProperty
+     * @see ChartData
+     * @see ObservableList
+     */
     public ObservableList<ChartData> getChartData() {
         return chartData;
     }
