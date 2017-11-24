@@ -1,9 +1,14 @@
 package ihm;
 
 import Modele.ArduinoStates;
+import Modele.ChartData;
+import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -73,6 +78,8 @@ public class AppController {
     @FXML
     private Label Kd_actuel;
 
+    //private ObservableList<String> XaxisCategories = FXCollections.observableArrayList();
+    private int TickResolution = 100;
 
     private HashMap<String, Double> createAnOrder(String key, Double value){
 
@@ -100,18 +107,52 @@ public class AppController {
         this.Ki_actuel.textProperty().bind(this.arduinoStates.getPropertyKi());
         this.Kd_actuel.textProperty().bind(this.arduinoStates.getPropertyKd());
 
+        //Configure axis
+        NumberAxis XAxis  = (NumberAxis)hist.getXAxis();
+        NumberAxis YAxis  = (NumberAxis)hist.getYAxis();
 
+        XAxis.setAutoRanging(false);
+        YAxis.setAutoRanging(false);
 
-        XYChart.Series series = new XYChart.Series();
+        YAxis.setLowerBound(0);
+        YAxis.setUpperBound(30);
 
-        series.setName("Temp");
-        this.hist.getData().add(series);
+        XAxis.setTickLabelsVisible(false);
 
-        this.arduinoStates.getSerieTp().addListener((ListChangeListener.Change<? extends XYChart.Data> c) -> {
+        //Configure series
+        XYChart.Series serieTa = new XYChart.Series();
+        XYChart.Series serieTp = new XYChart.Series();
+        XYChart.Series serieH = new XYChart.Series();
+        XYChart.Series seriePr = new XYChart.Series();
+        XYChart.Series seriePw = new XYChart.Series();
+
+        serieTa.setName("Temperature ambiante");
+        serieTp.setName("Temperature plaque");
+        serieH.setName("Humiditee");
+        seriePr.setName("Point de rosee");
+        seriePw.setName("Alimentation");
+
+        this.hist.getData().add(serieTa);
+        this.hist.getData().add(serieTp);
+        this.hist.getData().add(serieH);
+        this.hist.getData().add(seriePr);
+        this.hist.getData().add(seriePw);
+
+        //Update series
+        this.arduinoStates.getChartData().addListener((ListChangeListener.Change<? extends ChartData> c) -> {
             c.next();
             if (c.wasAdded()) {
-                for (XYChart.Data added: c.getAddedSubList()) {
-                    series.getData().add(added);
+                for (ChartData added: c.getAddedSubList()) {
+                    serieTa.getData().add(new XYChart.Data<>(added.tick, added.Ta));
+                    serieTp.getData().add(new XYChart.Data<>(added.tick, added.Tp));
+                    serieH.getData().add(new XYChart.Data<>(added.tick, added.H));
+                    seriePr.getData().add(new XYChart.Data<>(added.tick, added.Pr));
+                    seriePw.getData().add(new XYChart.Data<>(added.tick, added.Pw));
+
+                    if (added.tick > TickResolution) {
+                        XAxis.setLowerBound(added.tick-TickResolution);
+                        XAxis.setUpperBound(added.tick);
+                    }
                 }
             }
         });

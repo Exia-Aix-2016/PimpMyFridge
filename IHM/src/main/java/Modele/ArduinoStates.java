@@ -7,10 +7,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.chart.XYChart;
 
-import java.util.HashMap;
-import java.util.Observable;
-import java.util.Observer;
-import java.util.Stack;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 
 public class ArduinoStates implements Observer{
@@ -27,8 +25,7 @@ public class ArduinoStates implements Observer{
     private StringProperty propertyKi = new SimpleStringProperty();
     private StringProperty propertyKd = new SimpleStringProperty();
 
-    private ObservableList<XYChart.Data> serieTp = FXCollections.observableArrayList();
-
+    private ObservableList<ChartData> chartData = FXCollections.observableArrayList();
 
     private static ArduinoStates instance;
 
@@ -79,7 +76,7 @@ public class ArduinoStates implements Observer{
             this.propertyPw.setValue(String.valueOf(state.getPw()));
             this.propertyTt.setValue(String.valueOf(state.getTt()));
 
-            this.serieTp.add(new XYChart.Data<>(state.getTime().toString(), state.getTp()));
+            this.chartData.add(new ChartData(state));
         });
 
         this.stateHistory.push(state);
@@ -125,7 +122,7 @@ public class ArduinoStates implements Observer{
         return propertyKd;
     }
 
-    public ObservableList<XYChart.Data> getSerieTp() {
-        return serieTp;
+    public ObservableList<ChartData> getChartData() {
+        return chartData;
     }
 }
