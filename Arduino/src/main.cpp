@@ -1,15 +1,8 @@
 #include <Arduino.h>
-#include <AutoPID.h>
-#include <DHT.h>
-#include <math.h>
 
-#define OUTPUT_MIN 0
-#define OUTPUT_MAX 255
-#define KP 250
-#define KI 1.5
-#define KD 0.001
-#define DHTPIN 2
-#define DHTTYPE DHT22
+#include "sensor_dht.h"
+#include "pid.h"
+#include "main.h"
 
 
 
@@ -20,76 +13,114 @@ int getNextIndex(float coef);
 int sensor = A0;
 int fridge = 6;
 int R25 = 9411.0;
-int targetTemp = 12;
+
 
 float refTemp[21] = {0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100};
 float coefs[21] = {2.8665, 2.2907, 1.8438, 1.492, 1.2154, 1.0, 0.82976, 0.68635, 0.57103, 0.48015, 0.40545, 0.3417, 0.28952, 0.24714, 0.21183, 0.18194, 0.1568, 0.13592, 0.11822, 0.1034, 0.090741};
+char orders[4][5]={"Tt","Kp","Ki","Kd"};
 
-double tempPlaque, outputVal;
-double setPoint = -12;
+Order receiveDatas(){
+  Order Sorder;
+  int numbOfData = Serial.available();
+  if(numbOfData > 0){
+    String trame = "";
+    for(int i = 0; i < numbOfData; i++){
+      trame += (char)Serial.read();
+    }
 
-double alpha;
-double a = 17.27;
-double b = 237.7;
-double rosee;
+    if(trame.charAt(0) == '<'){
 
+      int cursor = 0;
+      String order, value;
 
-AutoPID PID(&tempPlaque, &setPoint, &outputVal, OUTPUT_MIN, OUTPUT_MAX, KP, KI, KD);
-DHT dht(DHTPIN, DHTTYPE);
+      for(int i = 1; i < trame.length() && trame.charAt(i) != ':'; i++){
+        order += trame.charAt(i);
+        cursor++;
+      }
+      cursor += 2;
+      Sorder.ord = order;
+
+      for(int i = cursor; i < trame.length() && trame.charAt(i) != '>'; i++){
+        value += trame.charAt(i);
+        cursor++;
+      }
+      Sorder.value = value.toDouble();
+    }
+  }
+  return Sorder;
+}
 
 void setup() {
   pinMode(fridge, OUTPUT);
-  Serial.println("DHT22 test!");
-  dht.begin();
+  startDHT();
   Serial.begin(9600);
 }
 
 void loop() {
   float volt = ((analogRead(sensor) * 5.0) / 1023.0);
   double ohm = (10000.0 * volt)/ (5.0 - volt);
-  tempPlaque = getTemp(ohm) * -1;
+  double tempPlaque = getTemp(ohm) * -1;
+
+  setTempPlaque(tempPlaque);
+
+  double humidity = getHumidity();
+  double tempAmbiant = getTempAmbiant();
+
+  scanDHT();
 
 
+//RECEPTION
+  Order ordre = receiveDatas();
+  if(ordre.ord == "Tt"){
+    setTargetTemp(ordre.value);
+  }else if(ordre.ord == "Kp"){
+    setkp(ordre.value);
+  }else if(ordre.ord == "Ki"){
+    setki(ordre.value);
+  }else if(ordre.ord == "Kd"){
+    setkd(ordre.value);
+  }
 
-  delay(2000);
+//ENVOIE
+Serial.print("<");
+Serial.print("Ta:");
+Serial.print(tempAmbiant);
+Serial.print("|");
+Serial.print("Tp:");
+Serial.print(getTemp(ohm));
+Serial.print("|");
+Serial.print("H:");
+Serial.print(humidity);
+Serial.print("|");
+Serial.print("Pr:");
+Serial.print(calcRosee(tempAmbiant, humidity));
+Serial.print("|");
+Serial.print("Pw:");
+Serial.print(getOutputVal());
+Serial.print("|");
+Serial.print("Tt:");
+Serial.print(getTargetTemp());
+Serial.print("|");
+Serial.print("Kp:");
+Serial.print(getKp());
+Serial.print("|");
+Serial.print("Ki:");
+Serial.print(getKi());
+Serial.print("|");
+Serial.print("Kd:");
+Serial.print(getKd(), 5);
+Serial.println(">");
 
- double humidity = dht.readHumidity();
- double tempAmbiant = dht.readTemperature();
 
-
- if (isnan(humidity) || isnan(tempAmbiant))
-   Serial.println("Failed to read from DHT sensor");
-
-
-  alpha = ((a * tempAmbiant) / (b + tempAmbiant)) + log(humidity/100);
-  rosee = (b * alpha) / (a - alpha);
-
-
- Serial.print("Humidite: ");
- Serial.print(humidity);
- Serial.print(" \%  ");
- Serial.print("Temperature ambiante: ");
- Serial.print(tempAmbiant);
- Serial.print(" *C  ");
- Serial.print("Temperature plaque: ");
- Serial.print(getTemp(ohm));
- Serial.print(" *C  ");
- Serial.print("Puissance envoyée: ");
- Serial.print(outputVal);
- Serial.print("/255  ");
- Serial.print("Point de rosee: ");
- Serial.print(rosee);
- Serial.println(" *C");
-
- if (Serial.available() > 0) {
-   setPoint = Serial.parseInt() * -1;
+ if(calcRosee(tempAmbiant, humidity) > getTargetTemp()){
+   setSetPoint(calcRosee(tempAmbiant, humidity));
  }else{
-   setPoint = rosee * -1;
+   setSetPoint(getTargetTemp());
  }
 
- PID.run();
- analogWrite(fridge, outputVal);
+startPID();
 
+ analogWrite(fridge, getOutputVal());
 
 }
 
@@ -128,5 +159,4 @@ float getTemp(float ohm){
   float b = refTemp[previousIndex] - (a * coefs[previousIndex]);
 
   return a * coef + b;
-
 }

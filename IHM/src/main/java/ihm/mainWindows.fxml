@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="1297.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ihm.AppController">
+   <center>
+      <LineChart fx:id="hist" createSymbols="false" prefHeight="291.0" prefWidth="975.0" verticalGridLinesVisible="false" BorderPane.alignment="CENTER">
+        <xAxis>
+          <NumberAxis side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis side="LEFT" />
+        </yAxis>
+      </LineChart>
+   </center>
+   <bottom>
+      <HBox prefHeight="179.0" prefWidth="975.0" spacing="50.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox prefHeight="64.0" prefWidth="157.0" spacing="7.0">
+               <children>
+                  <Label fx:id="labelTempConsigne" text="Réglage Température : " />
+                  <HBox prefHeight="33.0" prefWidth="157.0" spacing="5.0">
+                     <children>
+                        <Label text="Target :" />
+                        <Label fx:id="Tt_actuel" text="0.0" />
+                        <Label text="°C" />
+                     </children>
+                  </HBox>
+                  <TextField fx:id="Tt" />
+                  <HBox prefHeight="36.0" prefWidth="157.0" spacing="15.0">
+                     <children>
+                        <Button fx:id="btn_Set_Tt" mnemonicParsing="false" text="Appliquer" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox prefHeight="179.0" prefWidth="652.0">
+               <children>
+                  <HBox prefHeight="33.0" prefWidth="326.0">
+                     <children>
+                        <Label text="Réglage PID" />
+                     </children>
+                     <padding>
+                        <Insets left="187.0" />
+                     </padding>
+                  </HBox>
+                  <HBox prefHeight="50.0" prefWidth="326.0" spacing="10.0">
+                     <children>
+                        <Label fx:id="label_PID_P" text="Proportionnalité :" />
+                        <Label fx:id="Kp_actuel" text="0.0" />
+                        <TextField fx:id="Kp" />
+                        <Button fx:id="btn_Set_Kp" mnemonicParsing="false" text="Appliquer" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="50.0" prefWidth="326.0" spacing="10.0">
+                     <children>
+                        <Label fx:id="label_PID_I" text="Intégralité :" />
+                        <Label fx:id="Ki_actuel" text="0.0" />
+                        <HBox prefHeight="49.0" prefWidth="30.0" />
+                        <TextField fx:id="Ki" />
+                        <Button fx:id="btn_Set_Ki" mnemonicParsing="false" text="Appliquer" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="50.0" prefWidth="326.0" spacing="10.0">
+                     <children>
+                        <Label fx:id="label_PID_D" text="Dérivation :" />
+                        <Label fx:id="Kd_actuel" text="0.0" />
+                        <HBox prefHeight="100.0" prefWidth="30.0" />
+                        <TextField fx:id="Kd" />
+                        <Button fx:id="btn_Set_Kd" mnemonicParsing="false" text="Appliquer" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+         <padding>
+            <Insets left="238.0" />
+         </padding>
+      </HBox>
+   </bottom>
+   <top>
+      <HBox prefHeight="50.0" prefWidth="975.0" spacing="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="39.0" prefWidth="223.0" spacing="5.0">
+               <children>
+                  <Label fx:id="Label_H" text="Humidité :" />
+                  <Label fx:id="H" text="0" />
+                  <Label text="\%" />
+               </children>
+            </HBox>
+            <HBox prefHeight="39.0" prefWidth="261.0" spacing="5.0">
+               <children>
+                  <Label fx:id="label_Tp" text="Température Plaque :" />
+                  <Label fx:id="Tp" text="0.0" />
+                  <Label text="°C" />
+               </children>
+            </HBox>
+            <HBox prefHeight="39.0" prefWidth="314.0" spacing="5.0">
+               <children>
+                  <Label text="Température ambiante : " />
+                  <Label fx:id="Ta" text="0.0" />
+                  <Label text="°C" />
+               </children>
+            </HBox>
+            <HBox prefHeight="39.0" prefWidth="269.0" spacing="5.0">
+               <children>
+                  <Label text="Point de rosée : " />
+                  <Label fx:id="Pr" text="0.0" />
+                  <Label text="°C" />
+               </children>
+            </HBox>
+         </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+         <padding>
+            <Insets left="50.0" top="11.0" />
+         </padding>
+      </HBox>
+   </top>
+</BorderPane>
